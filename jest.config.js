@@ -16,6 +16,7 @@ const customJestConfig = {
 
   testEnvironment: 'jest-environment-jsdom',
 
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx,js,jsx}'],
   /**
    * Absolute imports and Module Path Aliases
    */

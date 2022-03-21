@@ -76,4 +76,8 @@ jobs:
         with:
           version: 6.15.1
           run_install: true
-      - run: yarn test
+      - run: pnpm run test:ci
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
