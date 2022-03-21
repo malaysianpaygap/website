@@ -3,7 +3,7 @@ import * as React from 'react';
 import { UnstyledLink } from '@/components/links';
 
 const links = [
-  { href: '/', label: 'Route 1' },
+  { href: 'https://www.instagram.com/malaysianpaygap/', label: 'Instagram' },
   { href: '/', label: 'Route 2' },
 ];
 

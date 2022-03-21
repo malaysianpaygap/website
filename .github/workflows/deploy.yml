@@ -1,0 +1,41 @@
+name: Deploy Website
+
+on:
+  - push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.15.1
+          run_install: true
+      - name: Build Site
+        run: pnpm run build
+
+      - name: Deploy to Production
+        uses: amondnet/vercel-action@v20
+        if: github.ref == 'refs/heads/master'
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-args: '--prod'
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
+
+      - name: Deploy for Preview
+        uses: amondnet/vercel-action@v20
+        if: github.ref != 'refs/heads/master'
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
