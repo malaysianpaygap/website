@@ -4,7 +4,6 @@ import { UnstyledLink } from '@/components/links';
 
 const links = [
   { href: 'https://www.instagram.com/malaysianpaygap/', label: 'Instagram' },
-  { href: '/', label: 'Route 2' },
 ];
 
 export function Header() {
