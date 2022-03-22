@@ -32,6 +32,7 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.1.8
   react: ^17.0.2
   react-dom: ^17.0.2
+  react-google-recaptcha-v3: ^1.9.7
   react-hook-form: ^7.28.0
   react-icons: ^4.3.1
   react-textarea-autosize: ^8.3.3
@@ -51,6 +52,7 @@ dependencies:
   next: 12.1.0_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-google-recaptcha-v3: 1.9.7_react-dom@17.0.2+react@17.0.2
   react-hook-form: 7.28.0_react@17.0.2
   react-icons: 4.3.1_react@17.0.2
   react-textarea-autosize: 8.3.3_00d6772dea80510e818fd171caaa025a
@@ -4479,6 +4481,12 @@ packages:
     resolution: {integrity: sha512-0cMsjjIC8I+D3M44pOQdsy0OHXGLVz6Z0beRuufhKa0KfaD2wGwAev6jILzXsd3/vpnNQJmWyZtIILqM1N+n5A==}
     dev: false
 
+  /hoist-non-react-statics/3.3.2:
+    resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
+    dependencies:
+      react-is: 16.13.1
+    dev: false
+
   /hosted-git-info/2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
@@ -6244,6 +6252,17 @@ packages:
       scheduler: 0.20.2
     dev: false
 
+  /react-google-recaptcha-v3/1.9.7_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-LgHTuPUE86jGOtmMYMUWEYux8n7M2ZNj5GHct//DlXWZGyLIgFfLbvxA3UlgrG+tSu2pgw2mqXtYdPxaldqhWQ==}
+    peerDependencies:
+      react: ^17.0
+      react-dom: ^17.0
+    dependencies:
+      hoist-non-react-statics: 3.3.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
   /react-hook-form/7.28.0_react@17.0.2:
     resolution: {integrity: sha512-mmLpT86BkMGPr0r6ca8zxV0WH4Y1FW5MKs7Rq1+uHLVeeg5pSWbF5Z/qLCnM5vPVblHNM6lRBRRotnfEAf0ALA==}
     engines: {node: '>=12.22.0'}
@@ -6263,7 +6282,6 @@ packages:
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: true
 
   /react-is/17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
