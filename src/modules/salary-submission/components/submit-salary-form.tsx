@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 
 import { countryOptions } from '@/lib/country-options';
@@ -392,6 +393,8 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
   initialValues?: ThoughtsAndVerificationDetails;
   onComplete: (data: Required<ThoughtsAndVerificationDetails>) => void;
 }) => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const form = useForm({
     defaultValues: props.initialValues || {
       thoughts: '',
@@ -402,7 +405,25 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
   const formErrors = formatErrors(formState.errors, labelForThoughts);
 
   return (
-    <Form form={form} onSubmit={handleSubmit(props.onComplete)}>
+    <Form
+      form={form}
+      onSubmit={handleSubmit(async (d) => {
+        if (!executeRecaptcha) return;
+
+        props.onComplete(d);
+
+        const token = await executeRecaptcha();
+        // todo: data to submit
+        const response = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'Application/json' },
+          body: JSON.stringify({ token }),
+        });
+        const data = await response.json();
+        // eslint-disable-next-line no-console
+        console.log(data);
+      })}
+    >
       <div className='space-y-8'>
         <ErrorAlert errors={formErrors} />
         <Form.TextareaField name='thoughts' label={labelForThoughts.thoughts} />
