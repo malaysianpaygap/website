@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 
 import { countryOptions } from '@/lib/country-options';
@@ -10,6 +11,8 @@ import { formatErrors } from '@/components/form/form';
 import { Stepper } from '@/components/stepper';
 
 export const SubmitSalaryForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [formIndex, setFormIndex] = React.useState(0);
   const [personalDetails, setPersonalDetails] = React.useState<
     PersonalDetailsData | undefined
@@ -20,6 +23,21 @@ export const SubmitSalaryForm = () => {
   const [thoughts, setThoughts] = React.useState<
     ThoughtsAndVerificationDetails | undefined
   >(undefined);
+
+  const handleComplete = async () => {
+    if (!executeRecaptcha) return;
+
+    const token = await executeRecaptcha();
+    // todo: data to submit
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'Application/json' },
+      body: JSON.stringify({ token }),
+    });
+    const data = await response.json();
+    // eslint-disable-next-line no-console
+    console.log(data);
+  };
 
   return (
     <div>
@@ -56,6 +74,7 @@ export const SubmitSalaryForm = () => {
           initialValues={thoughts}
           onComplete={(th) => {
             setThoughts(th);
+            handleComplete();
           }}
         />
       )}

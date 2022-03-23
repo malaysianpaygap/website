@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 import '@/styles/globals.css';
 
@@ -12,7 +13,11 @@ import { IsClientProvider } from '@/hooks/use-is-client';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <IsClientProvider>
-      <Component {...pageProps} />
+      <GoogleReCaptchaProvider
+        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+      >
+        <Component {...pageProps} />
+      </GoogleReCaptchaProvider>
     </IsClientProvider>
   );
 }
