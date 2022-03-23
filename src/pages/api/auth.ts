@@ -24,6 +24,7 @@ async function _validateHuman(token: string): Promise<boolean> {
     }
   );
   const data: { success: boolean; score: number } = await response.json();
-  // console.log(data);
+  // eslint-disable-next-line no-console
+  console.log(data);
   return data.success;
 }

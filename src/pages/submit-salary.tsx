@@ -1,5 +1,3 @@
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
-
 import { Layout } from '@/components/layout';
 import { Seo } from '@/components/seo';
 
@@ -10,11 +8,7 @@ export default function SubmitSalaryPage() {
     <Layout>
       <Seo templateTitle='Submit Salary' />
       <main className='layout'>
-        <GoogleReCaptchaProvider
-          reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-        >
-          <SubmitSalaryForm />
-        </GoogleReCaptchaProvider>
+        <SubmitSalaryForm />
       </main>
     </Layout>
   );
