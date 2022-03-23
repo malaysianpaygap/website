@@ -11,6 +11,8 @@ import { formatErrors } from '@/components/form/form';
 import { Stepper } from '@/components/stepper';
 
 export const SubmitSalaryForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [formIndex, setFormIndex] = React.useState(0);
   const [personalDetails, setPersonalDetails] = React.useState<
     PersonalDetailsData | undefined
@@ -21,6 +23,21 @@ export const SubmitSalaryForm = () => {
   const [thoughts, setThoughts] = React.useState<
     ThoughtsAndVerificationDetails | undefined
   >(undefined);
+
+  const handleComplete = async () => {
+    if (!executeRecaptcha) return;
+
+    const token = await executeRecaptcha();
+    // todo: data to submit
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'Application/json' },
+      body: JSON.stringify({ token }),
+    });
+    const data = await response.json();
+    // eslint-disable-next-line no-console
+    console.log(data);
+  };
 
   return (
     <div>
@@ -57,6 +74,7 @@ export const SubmitSalaryForm = () => {
           initialValues={thoughts}
           onComplete={(th) => {
             setThoughts(th);
+            handleComplete();
           }}
         />
       )}
@@ -393,8 +411,6 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
   initialValues?: ThoughtsAndVerificationDetails;
   onComplete: (data: Required<ThoughtsAndVerificationDetails>) => void;
 }) => {
-  const { executeRecaptcha } = useGoogleReCaptcha();
-
   const form = useForm({
     defaultValues: props.initialValues || {
       thoughts: '',
@@ -405,25 +421,7 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
   const formErrors = formatErrors(formState.errors, labelForThoughts);
 
   return (
-    <Form
-      form={form}
-      onSubmit={handleSubmit(async (d) => {
-        if (!executeRecaptcha) return;
-
-        props.onComplete(d);
-
-        const token = await executeRecaptcha();
-        // todo: data to submit
-        const response = await fetch('/api/auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'Application/json' },
-          body: JSON.stringify({ token }),
-        });
-        const data = await response.json();
-        // eslint-disable-next-line no-console
-        console.log(data);
-      })}
-    >
+    <Form form={form} onSubmit={handleSubmit(props.onComplete)}>
       <div className='space-y-8'>
         <ErrorAlert errors={formErrors} />
         <Form.TextareaField name='thoughts' label={labelForThoughts.thoughts} />
