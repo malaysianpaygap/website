@@ -368,6 +368,17 @@ const SubmitSalarySalaryDetailsForm = (props: {
           </option>
           <option value='Johor'>Johor</option>
           <option value='Kedah'>Kedah</option>
+          <option value='Kelantan'>Kelantan</option>
+          <option value='Malacca'>Malacca</option>
+          <option value='Negeri Sembilan'>Negeri Sembilan</option>
+          <option value='Pahang'>Pahang</option>
+          <option value='Penang'>Penang</option>
+          <option value='Perak'>Perak</option>
+          <option value='Perlis'>Perlis</option>
+          <option value='Sabah'>Sabah</option>
+          <option value='Sarawak'>Sarawak</option>
+          <option value='Selangor'>Selangor</option>
+          <option value='Terengganu'>Terengganu</option>
         </Form.DropdownField>
         <div>
           <Button type='submit' className='w-full justify-center'>
