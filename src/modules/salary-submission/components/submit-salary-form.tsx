@@ -380,6 +380,45 @@ const SubmitSalarySalaryDetailsForm = (props: {
           <option value='Selangor'>Selangor</option>
           <option value='Terengganu'>Terengganu</option>
         </Form.DropdownField>
+        <Form.RadioField
+          label={labelForSalaryDetails.typeOfCompany}
+          name='typeOfCompany'
+          required
+          options={[
+            {
+              label: 'Freelance/Self-employed (Bekerja Sendiri)',
+              value: 'Freelance/Self-employed (Bekerja Sendiri)',
+            },
+            {
+              label: 'Government-linked companies',
+              value: 'Government-linked companies',
+            },
+            {
+              label: 'Multinational corporation',
+              value: 'Multinational corporation',
+            },
+            {
+              label: 'Non-profit',
+              value: 'Non-profit',
+            },
+            {
+              label: 'Public Sector',
+              value: 'Public Sector',
+            },
+            {
+              label: 'Private large enterprises (local)',
+              value: 'Private large enterprises (local)',
+            },
+            {
+              label: 'Small & medium-sized enterprises',
+              value: 'Small & medium-sized enterprises',
+            },
+            {
+              label: 'Start-up',
+              value: 'Start-up',
+            },
+          ]}
+        />
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT
