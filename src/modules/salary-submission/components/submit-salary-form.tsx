@@ -551,6 +551,20 @@ const SubmitSalarySalaryDetailsForm = (props: {
           required
           decimalPlaces={0}
         />
+        <Form.LinearScaleField
+          label={labelForSalaryDetails.salarySatisfaction}
+          name='salarySatisfaction'
+          required
+          fromLabel='Very unhappy (Sangat sedih)'
+          toLabel='Very happy (Sangat gembira)'
+        />
+        <Form.LinearScaleField
+          label={labelForSalaryDetails.overallJobSatisfaction}
+          name='overallJobSatisfaction'
+          required
+          fromLabel='Very unsatisfied (Sangat tidak berpuas hati)'
+          toLabel='Very satisfied (Sangat berpuas hati)'
+        />
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT
