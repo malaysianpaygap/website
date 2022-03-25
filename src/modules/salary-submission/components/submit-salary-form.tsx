@@ -250,9 +250,9 @@ const labelForSalaryDetails: Record<keyof SalaryDetails, string> = {
     'What type of company do you work for? (Jenis syarikat yang anda bekerja?)',
   industry: 'Industry (Industri)',
   specialization: 'Job Specialisation (Pengkhususan Pekerjaan)',
-  averageWorkingDay:
-    'Average working hours per day (Purata jam bekerja dalam sehari)',
   averageWorkingHour:
+    'Average working hours per day (Purata jam bekerja dalam sehari)',
+  averageWorkingDay:
     'Average working days per week (Purata hari bekerja dalam seminggu)',
   monthSalaryInMyr:
     'Monthly salary in Ringgit Malaysia (Gross: before EPF, tax deduction) (Gaji bulanan dalam Ringgit Malaysia (Gaji Kasar: Sebelum KWSP & tolakan cukai))',
@@ -525,6 +525,20 @@ const SubmitSalarySalaryDetailsForm = (props: {
           </option>
           <option value='Other'>Other</option>
         </Form.DropdownField>
+        <Form.NumberField
+          label={labelForSalaryDetails.averageWorkingHour}
+          name='averageWorkingHour'
+          required
+          decimalPlaces={1}
+          max={24}
+        />
+        <Form.NumberField
+          label={labelForSalaryDetails.averageWorkingDay}
+          name='averageWorkingDay'
+          required
+          decimalPlaces={1}
+          max={7}
+        />
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT
