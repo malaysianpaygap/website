@@ -419,6 +419,70 @@ const SubmitSalarySalaryDetailsForm = (props: {
             },
           ]}
         />
+        <Form.DropdownField
+          label={labelForSalaryDetails.industry}
+          name='industry'
+          required
+        >
+          <option value=''>Please choose</option>
+          <option value='Healthcare/Health services'>
+            Healthcare/Health services
+          </option>
+          <option value='Utilities (water, gas, electricity)'>
+            Utilities (water, gas, electricity)
+          </option>
+          <option value='Aviation'>Aviation</option>
+          <option value='Construction'>Construction</option>
+          <option value='Automotive'>Automotive</option>
+          <option value='Supply Chain'>Supply Chain</option>
+          <option value='Real Estate'>Real Estate</option>
+          <option value='Engineering'>Engineering</option>
+          <option value='Manufacturing'>Manufacturing</option>
+          <option value='Technology/IT/Data'>Technology/IT/Data</option>
+          <option value='Web3'>Web3</option>
+          <option value='Food & Beverage'>Food & Beverage</option>
+          <option value='Hardware & Semiconductor'>
+            Hardware & Semiconductor
+          </option>
+          <option value='Gaming'>Gaming</option>
+          <option value='Recruitment'>Recruitment</option>
+          <option value='Public Service'>Public Service</option>
+          <option value='Veterinary'>Veterinary</option>
+          <option value='Fitness'>Fitness</option>
+          <option value='E-commerce & Retail'>E-commerce & Retail</option>
+          <option value='Finance'>Finance</option>
+          <option value='Media & Entertainment'>Media & Entertainment</option>
+          <option value='Medical Devices Industry'>
+            Medical Devices Industry
+          </option>
+          <option value='Transportation/Logistics'>
+            Transportation/Logistics
+          </option>
+          <option value='Oil & Gas'>Oil & Gas</option>
+          <option value='Telecommunication Services'>
+            Telecommunication Services
+          </option>
+          <option value='Financial services/Investment/Banking/Insurance'>
+            Financial services/Investment/Banking/Insurance
+          </option>
+          <option value='Chemical'>Chemical</option>
+          <option value='FMCG'>FMCG</option>
+          <option value='NGOs'>NGOs</option>
+          <option value='Business Process Outsourcing (BPO)'>
+            Business Process Outsourcing (BPO)
+          </option>
+          <option value='Architecture'>Architecture</option>
+          <option value='Consulting'>Consulting</option>
+          <option value='Pharmaceutical'>Pharmaceutical</option>
+          <option value='Tourism/Hospitality'>Tourism/Hospitality</option>
+          <option value='Fashion'>Fashion</option>
+          <option value='Creative Arts'>Creative Arts</option>
+          <option value='Legal'>Legal</option>
+          <option value='Agriculture/Plantation'>Agriculture/Plantation</option>
+          <option value='Education'>Education</option>
+          <option value='Public Relations'>Public Relations</option>
+          <option value='Other'>Other</option>
+        </Form.DropdownField>
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT
