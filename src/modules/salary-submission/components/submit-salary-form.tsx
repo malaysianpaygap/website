@@ -539,6 +539,18 @@ const SubmitSalarySalaryDetailsForm = (props: {
           decimalPlaces={1}
           max={7}
         />
+        <Form.NumberField
+          label={labelForSalaryDetails.monthSalaryInMyr}
+          name='monthSalaryInMyr'
+          required
+          decimalPlaces={0}
+        />
+        <Form.NumberField
+          label={labelForSalaryDetails.firstJobSalaryInMyr}
+          name='firstJobSalaryInMyr'
+          required
+          decimalPlaces={0}
+        />
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT
