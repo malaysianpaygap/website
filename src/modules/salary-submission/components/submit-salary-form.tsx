@@ -483,6 +483,48 @@ const SubmitSalarySalaryDetailsForm = (props: {
           <option value='Public Relations'>Public Relations</option>
           <option value='Other'>Other</option>
         </Form.DropdownField>
+        {/* Todo: Add allowOthers prop for DropdownField */}
+        <Form.DropdownField
+          label={labelForSalaryDetails.specialization}
+          name='specialization'
+        >
+          <option value=''>Please choose</option>
+          <option value='Admin'>Admin</option>
+          <option value='Accounting'>Accounting</option>
+          <option value='Architect'>Architect</option>
+          <option value='Audit/Taxation'>Audit/Taxation</option>
+          <option value='Business Development'>Business Development</option>
+          <option value='Creative - Art direction/visual design/copywriting'>
+            Creative - Art direction/visual design/copywriting
+          </option>
+          <option value='Consulting'>Consulting</option>
+          <option value='Corporate Communications'>
+            Corporate Communications
+          </option>
+          <option value='Customer Service'>Customer Service</option>
+          <option value='Design'>Design</option>
+          <option value='Engineering'>Engineering</option>
+          <option value='Human Resources'>Human Resources</option>
+          <option value='Interior Design'>Interior Design</option>
+          <option value='IT - Data'>IT - Data</option>
+          <option value='IT - Hardware'>IT - Hardware</option>
+          <option value='IT - Network/DB/Sys'>IT - Network/DB/Sys</option>
+          <option value='IT - Software'>IT - Software</option>
+          <option value='Journalist/Editor'>Journalist/Editor</option>
+          <option value='Legal'>Legal</option>
+          <option value='Maintenance'>Maintenance</option>
+          <option value='Marketing'>Marketing</option>
+          <option value='Project Management'>Project Management</option>
+          <option value='Purchasing & Procurement'>
+            Puchasing & Procurement
+          </option>
+          <option value='Quantity Survey'>Quantity Survey</option>
+          <option value='Sales'>Sales</option>
+          <option value='Secretarial/Personal Assistant'>
+            Secretarial/Personal Assistant
+          </option>
+          <option value='Other'>Other</option>
+        </Form.DropdownField>
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT
