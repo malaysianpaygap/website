@@ -577,11 +577,13 @@ const SubmitSalarySalaryDetailsForm = (props: {
 
 interface ThoughtsAndVerificationDetails {
   thoughts: string;
+  email: string;
 }
 
 const labelForThoughts: Record<keyof ThoughtsAndVerificationDetails, string> = {
   thoughts:
     'Additional thoughts/insights you would like to share (Kongsikan pendapat / luahan hati anda)',
+  email: 'Email address (Emel)',
 };
 
 const SubmitSalaryThoughtsAndVerificationForm = (props: {
@@ -591,6 +593,7 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
   const form = useForm({
     defaultValues: props.initialValues || {
       thoughts: '',
+      email: '',
     },
   });
 
@@ -602,6 +605,33 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
       <div className='space-y-8'>
         <ErrorAlert errors={formErrors} />
         <Form.TextareaField name='thoughts' label={labelForThoughts.thoughts} />
+        <div>
+          <h1 className='font-medium font-bold text-xl text-gray-700'>
+            We might need you again in near future. Kami perlukan anda.
+          </h1>
+          <p className='font-medium text-sm text-gray-700 mt-2'>
+            In order to make better use of the data in the future, we may need
+            to obtain additional information via email, such as incomplete
+            personal or demographic data or consent. To the extent that you are
+            willing, please provide your email address for our future reference.
+            Please note that we will not share your personal information with
+            any other parties, such as marketing companies. Your submission will
+            be shared publicly. However, your email will only be private and
+            used by MPG for future correspondence.
+          </p>
+          <p className='font-medium text-sm text-gray-700 mt-4'>
+            Untuk mengguna pakai data yang telah diambil dengan lebih berkesan,
+            pihak kami mungkin memerlukan lebih informasi di masa hadapan. Jika
+            tidak keberatan, sila tinggalkan email anda supaya kami boleh
+            hubungi anda jika berlaku perkara seperti “Informasi tidak lengkap,
+            data demografik atau berkenaan persetujuan”. Harap maklum, pihak
+            kami tidak akan berkongsi maklumat peribadi anda kepada pihak
+            ketiga, contohnya seperti agensi pemasaran. Penyerahan data anda
+            akan dikongsi kepada pihak awam, tetapi emel anda tidak akan
+            dikongsi & hanya akan digunakan oleh MPG untuk menghubungi anda.
+          </p>
+        </div>
+        <Form.TextField label={labelForThoughts.email} name='email' />
         <div>
           <Button type='submit' className='w-full justify-center'>
             SUBMIT
