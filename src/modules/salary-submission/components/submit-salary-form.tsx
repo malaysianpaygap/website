@@ -631,7 +631,16 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
             dikongsi & hanya akan digunakan oleh MPG untuk menghubungi anda.
           </p>
         </div>
-        <Form.TextField label={labelForThoughts.email} name='email' />
+        <Form.TextField
+          label={labelForThoughts.email}
+          name='email'
+          rules={{
+            pattern: {
+              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+              message: 'invalid email address',
+            },
+          }}
+        />
         <div>
           <Button type='submit' className='w-full justify-center'>
             SUBMIT
