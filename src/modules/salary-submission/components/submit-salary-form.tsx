@@ -606,10 +606,10 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
         <ErrorAlert errors={formErrors} />
         <Form.TextareaField name='thoughts' label={labelForThoughts.thoughts} />
         <div>
-          <h1 className='font-medium font-bold text-xl text-gray-700'>
+          <h1 className='font-medium text-lg text-gray-700'>
             We might need you again in near future. Kami perlukan anda.
           </h1>
-          <p className='font-medium text-sm text-gray-700 mt-2'>
+          <p className='text-sm text-gray-700 mt-2 text-justify'>
             In order to make better use of the data in the future, we may need
             to obtain additional information via email, such as incomplete
             personal or demographic data or consent. To the extent that you are
@@ -619,7 +619,7 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
             be shared publicly. However, your email will only be private and
             used by MPG for future correspondence.
           </p>
-          <p className='font-medium text-sm text-gray-700 mt-4'>
+          <p className='text-sm text-gray-700 mt-4 text-justify'>
             Untuk mengguna pakai data yang telah diambil dengan lebih berkesan,
             pihak kami mungkin memerlukan lebih informasi di masa hadapan. Jika
             tidak keberatan, sila tinggalkan email anda supaya kami boleh
