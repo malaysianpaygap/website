@@ -62,7 +62,7 @@ const NumberInputImpl = function NumberInput({
 
   return (
     <TextInput
-      className={cls('text-right', className)}
+      className={cls('text-left', className)}
       {...inputProps}
       value={value}
       onChange={callAll(onChange, inputProps.onChange)}
