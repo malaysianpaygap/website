@@ -26,11 +26,26 @@ import { Skeleton } from '@/components/skeleton';
 export default function ComponentsPage() {
   const [mode, setMode] = React.useState<'dark' | 'light'>('light');
   const [color] = React.useState('sky');
+
   function toggleMode() {
     return mode === 'dark' ? setMode('light') : setMode('dark');
   }
 
   const textColor = mode === 'dark' ? 'text-gray-300' : 'text-gray-600';
+  const options = [
+    {
+      label: 'One',
+      value: 'One',
+    },
+    {
+      label: 'Two',
+      value: 'Two',
+    },
+    {
+      label: 'Three',
+      value: 'Three',
+    },
+  ];
 
   return (
     <Layout>
@@ -285,34 +300,28 @@ export default function ComponentsPage() {
                     <option value='2'>Two</option>
                     <option value='3'>Three</option>
                   </DropdownField>
-                  <DropdownField label='Disabled' disabled>
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
+                  <DropdownField
+                    label='Disabled'
+                    disabled
+                    options={options}
+                  ></DropdownField>
                   <DropdownField
                     label='Success'
                     status='success'
                     secondaryLabel='Optional'
-                  >
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
-                  <DropdownField label='Warning' status='warning'>
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
+                    options={options}
+                  ></DropdownField>
+                  <DropdownField
+                    label='Warning'
+                    status='warning'
+                    options={options}
+                  ></DropdownField>
                   <DropdownField
                     label='Error'
                     status='error'
                     helpText='Required'
-                  >
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
+                    options={options}
+                  ></DropdownField>
                 </div>
               </li>
               <li>

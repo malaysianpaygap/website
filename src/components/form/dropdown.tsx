@@ -16,7 +16,7 @@ export interface DropdownProps
     label: string;
     value: string;
   }>;
-  onChangeValue: (value: string) => void;
+  onChangeValue?: (value: string) => void;
 }
 
 export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
@@ -29,8 +29,13 @@ export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
     return (
       <Downshift
         id={inputId}
-        onChange={(selectedItem) =>
-          onChangeValue(selectedItem ? selectedItem.value : '')
+        onChange={
+          onChangeValue
+            ? (selectedItem) =>
+                onChangeValue(selectedItem ? selectedItem.value : '')
+            : (selectedItem) => {
+                selectedItem;
+              }
         }
         itemToString={(item) => (item ? item.value : '')}
       >
