@@ -47,10 +47,7 @@ export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
           getToggleButtonProps,
           inputValue,
         }) => (
-          <div
-            {...getRootProps({}, { suppressRefError: true })}
-            ref={forwardedRef}
-          >
+          <div {...getRootProps(undefined, { suppressRefError: true })}>
             <div>
               <input
                 {...getInputProps()}

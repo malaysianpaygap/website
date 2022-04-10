@@ -295,11 +295,10 @@ export default function ComponentsPage() {
               <li>
                 <h2>DropdownField</h2>
                 <div className='flex flex-col flex-wrap gap-4'>
-                  <DropdownField label='Default'>
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
+                  <DropdownField
+                    label='Default'
+                    options={options}
+                  ></DropdownField>
                   <DropdownField
                     label='Disabled'
                     disabled
