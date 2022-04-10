@@ -3,6 +3,8 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 
 import { countryOptions } from '@/lib/country-options';
+import { genderOptions } from '@/lib/gender-options';
+import { stateOptions } from '@/lib/state-options';
 
 import { ErrorAlert } from '@/components/alert';
 import { Button } from '@/components/buttons';
@@ -136,12 +138,8 @@ const SubmitSalaryPersonalDetailsForm = (props: {
             label={labelForPersonalDetails.gender}
             name='gender'
             required
-          >
-            <option value=''>Please choose</option>
-            <option value='female' label='Female' />
-            <option value='male' label='Male' />
-            <option value='others' label='Non-binary/others' />
-          </Form.DropdownField>
+            options={genderOptions}
+          ></Form.DropdownField>
         </div>
         <Form.RadioField
           label={labelForPersonalDetails.race}
@@ -175,15 +173,9 @@ const SubmitSalaryPersonalDetailsForm = (props: {
         <Form.DropdownField
           label={labelForPersonalDetails.nationality}
           name='nationality'
+          options={countryOptions}
           required
-        >
-          <option value=''>Please choose</option>
-          {countryOptions.map((country) => (
-            <option value={country.value} key={country.value}>
-              {country.label}
-            </option>
-          ))}
-        </Form.DropdownField>
+        ></Form.DropdownField>
         <Form.RadioField
           label={labelForPersonalDetails.education}
           name='education'
@@ -373,21 +365,9 @@ const SubmitSalarySalaryDetailsForm = (props: {
         <Form.DropdownField
           name='state'
           label={labelForSalaryDetails.state}
+          options={stateOptions}
           required
-        >
-          <option value=''>Please select</option>
-          <option value='Federal Territory of Kuala Lumpur'>
-            Federal Territory of Kuala Lumpur
-          </option>
-          <option value='Federal Territory of Labuan'>
-            Federal Territory of Labuan
-          </option>
-          <option value='Federal Territory of Putrajaya'>
-            Federal Territory of Putrajaya
-          </option>
-          <option value='Johor'>Johor</option>
-          <option value='Kedah'>Kedah</option>
-        </Form.DropdownField>
+        ></Form.DropdownField>
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT
