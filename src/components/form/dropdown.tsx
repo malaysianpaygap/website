@@ -59,6 +59,9 @@ export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
                 onClick={() => {
                   setOpen(!open);
                 }}
+                onBlur={() => {
+                  setOpen(false);
+                }}
               />
             </div>
             {open && (
