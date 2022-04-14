@@ -117,12 +117,13 @@ const SubmitSalaryPersonalDetailsForm = (props: {
             label={labelForPersonalDetails.gender}
             name='gender'
             required
-          >
-            <option value=''>Please choose</option>
-            <option value='female' label='Female' />
-            <option value='male' label='Male' />
-            <option value='others' label='Non-binary/others' />
-          </Form.DropdownField>
+            options={[
+              { label: 'Please choose', value: '' },
+              { label: 'Female', value: 'female' },
+              { label: 'Male', value: 'male' },
+              { label: 'Non-binary/others', value: 'other' },
+            ]}
+          />
         </div>
         <Form.RadioField
           label={labelForPersonalDetails.race}
@@ -157,14 +158,8 @@ const SubmitSalaryPersonalDetailsForm = (props: {
           label={labelForPersonalDetails.nationality}
           name='nationality'
           required
-        >
-          <option value=''>Please choose</option>
-          {countryOptions.map((country) => (
-            <option value={country.value} key={country.value}>
-              {country.label}
-            </option>
-          ))}
-        </Form.DropdownField>
+          options={[{ label: 'Please choose', value: '' }, ...countryOptions]}
+        />
         <Form.RadioField
           label={labelForPersonalDetails.education}
           name='education'
@@ -228,7 +223,9 @@ interface SalaryDetails {
   state: string;
   typeOfCompany: string;
   industry: string;
-  specialization: string;
+  otherIndustry: string;
+  specialisation: string;
+  otherSpecialisation: string;
   averageWorkingHour: string;
   averageWorkingDay: string;
   monthSalaryInMyr: string;
@@ -249,7 +246,9 @@ const labelForSalaryDetails: Record<keyof SalaryDetails, string> = {
   typeOfCompany:
     'What type of company do you work for? (Jenis syarikat yang anda bekerja?)',
   industry: 'Industry (Industri)',
-  specialization: 'Job Specialisation (Pengkhususan Pekerjaan)',
+  otherIndustry: `If selected 'Other' for Industry, please clarify (Jika anda memilih ‘Other’ untuk Industri, sila nyatakan)`,
+  specialisation: 'Job Specialisation (Pengkhususan Pekerjaan)',
+  otherSpecialisation: `If selected 'Other' for Job Specialisation, please clarify (Jika anda memilih ‘Other’ untuk Pengkhususan Pekerjaan, sila nyatakan)`,
   averageWorkingHour:
     'Average working hours per day (Purata jam bekerja dalam sehari)',
   averageWorkingDay:
@@ -278,7 +277,9 @@ const SubmitSalarySalaryDetailsForm = (props: {
       state: '',
       typeOfCompany: '',
       industry: '',
-      specialization: '',
+      otherIndustry: '',
+      specialisation: '',
+      otherSpecialisation: '',
       averageWorkingDay: '',
       averageWorkingHour: '',
       monthSalaryInMyr: '',
@@ -355,31 +356,34 @@ const SubmitSalarySalaryDetailsForm = (props: {
           name='state'
           label={labelForSalaryDetails.state}
           required
-        >
-          <option value=''>Please select</option>
-          <option value='Federal Territory of Kuala Lumpur'>
-            Federal Territory of Kuala Lumpur
-          </option>
-          <option value='Federal Territory of Labuan'>
-            Federal Territory of Labuan
-          </option>
-          <option value='Federal Territory of Putrajaya'>
-            Federal Territory of Putrajaya
-          </option>
-          <option value='Johor'>Johor</option>
-          <option value='Kedah'>Kedah</option>
-          <option value='Kelantan'>Kelantan</option>
-          <option value='Malacca'>Malacca</option>
-          <option value='Negeri Sembilan'>Negeri Sembilan</option>
-          <option value='Pahang'>Pahang</option>
-          <option value='Penang'>Penang</option>
-          <option value='Perak'>Perak</option>
-          <option value='Perlis'>Perlis</option>
-          <option value='Sabah'>Sabah</option>
-          <option value='Sarawak'>Sarawak</option>
-          <option value='Selangor'>Selangor</option>
-          <option value='Terengganu'>Terengganu</option>
-        </Form.DropdownField>
+          options={[
+            { label: 'Please select', value: '' },
+            {
+              label: 'Federal Territory of Kuala Lumpur',
+              value: 'Federal Territory of Kuala Lumpur',
+            },
+            {
+              label: 'Federal Territory of Labuan',
+              value: 'Federal Territory of Labuan',
+            },
+            {
+              label: 'Federal Territory of Putrajaya',
+              value: 'Federal Territory of Putrajaya',
+            },
+            { label: 'Johor', value: 'Johor' },
+            { label: 'Kedah', value: 'Kedah' },
+            { label: 'Kelantan', value: 'Kelantan' },
+            { label: 'Malacca', value: 'Malacca' },
+            { label: 'Negeri Sembilan', value: 'Negeri Sembilan' },
+            { label: 'Pahang', value: 'Pahang' },
+            { label: 'Penang', value: 'Penang' },
+            { label: 'Perak', value: 'Perak' },
+            { label: 'Perlis', value: 'Perlis' },
+            { label: 'Sabah', value: 'Sabah' },
+            { label: 'Sarawak', value: 'Sarawak' },
+            { label: 'Terengganu', value: 'Terengganu' },
+          ]}
+        />
         <Form.RadioField
           label={labelForSalaryDetails.typeOfCompany}
           name='typeOfCompany'
@@ -423,108 +427,135 @@ const SubmitSalarySalaryDetailsForm = (props: {
           label={labelForSalaryDetails.industry}
           name='industry'
           required
-        >
-          <option value=''>Please choose</option>
-          <option value='Healthcare/Health services'>
-            Healthcare/Health services
-          </option>
-          <option value='Utilities (water, gas, electricity)'>
-            Utilities (water, gas, electricity)
-          </option>
-          <option value='Aviation'>Aviation</option>
-          <option value='Construction'>Construction</option>
-          <option value='Automotive'>Automotive</option>
-          <option value='Supply Chain'>Supply Chain</option>
-          <option value='Real Estate'>Real Estate</option>
-          <option value='Engineering'>Engineering</option>
-          <option value='Manufacturing'>Manufacturing</option>
-          <option value='Technology/IT/Data'>Technology/IT/Data</option>
-          <option value='Web3'>Web3</option>
-          <option value='Food & Beverage'>Food & Beverage</option>
-          <option value='Hardware & Semiconductor'>
-            Hardware & Semiconductor
-          </option>
-          <option value='Gaming'>Gaming</option>
-          <option value='Recruitment'>Recruitment</option>
-          <option value='Public Service'>Public Service</option>
-          <option value='Veterinary'>Veterinary</option>
-          <option value='Fitness'>Fitness</option>
-          <option value='E-commerce & Retail'>E-commerce & Retail</option>
-          <option value='Finance'>Finance</option>
-          <option value='Media & Entertainment'>Media & Entertainment</option>
-          <option value='Medical Devices Industry'>
-            Medical Devices Industry
-          </option>
-          <option value='Transportation/Logistics'>
-            Transportation/Logistics
-          </option>
-          <option value='Oil & Gas'>Oil & Gas</option>
-          <option value='Telecommunication Services'>
-            Telecommunication Services
-          </option>
-          <option value='Financial services/Investment/Banking/Insurance'>
-            Financial services/Investment/Banking/Insurance
-          </option>
-          <option value='Chemical'>Chemical</option>
-          <option value='FMCG'>FMCG</option>
-          <option value='NGOs'>NGOs</option>
-          <option value='Business Process Outsourcing (BPO)'>
-            Business Process Outsourcing (BPO)
-          </option>
-          <option value='Architecture'>Architecture</option>
-          <option value='Consulting'>Consulting</option>
-          <option value='Pharmaceutical'>Pharmaceutical</option>
-          <option value='Tourism/Hospitality'>Tourism/Hospitality</option>
-          <option value='Fashion'>Fashion</option>
-          <option value='Creative Arts'>Creative Arts</option>
-          <option value='Legal'>Legal</option>
-          <option value='Agriculture/Plantation'>Agriculture/Plantation</option>
-          <option value='Education'>Education</option>
-          <option value='Public Relations'>Public Relations</option>
-          <option value='Other'>Other</option>
-        </Form.DropdownField>
-        {/* Todo: Add allowOthers prop for DropdownField */}
+          options={[
+            {
+              label: 'Please choose',
+              value: '',
+            },
+            {
+              label: 'Healthcare/Health services',
+              value: 'Healthcare/Health services',
+            },
+            {
+              label: 'Utilities (water, gas, electricity)',
+              value: 'Utilities (water, gas, electricity)',
+            },
+            { label: 'Aviation', value: 'Aviation' },
+            { label: 'Construction', value: 'Construction' },
+            { label: 'Automotive', value: 'Automotive' },
+            { label: 'Supply Chain', value: 'Supply Chain' },
+            { label: 'Real Estate', value: 'Real Estate' },
+            { label: 'Engineering', value: 'Engineering' },
+            { label: 'Manufacturing', value: 'Manufacturing' },
+            { label: 'Technology/IT/Data', value: 'Technology/IT/Data' },
+            { label: 'Web3', value: 'Web3' },
+            { label: 'Food & Beverage', value: 'Food & Beverage' },
+            {
+              label: 'Hardware & Semiconductor',
+              value: 'Hardware & Semiconductor',
+            },
+            { label: 'Gaming', value: 'Gaming' },
+            { label: 'Recruitment', value: 'Recruitment' },
+            { label: 'Public Service', value: 'Public Service' },
+            { label: 'Veterinary', value: 'Veterinary' },
+            { label: 'Fitness', value: 'Fitness' },
+            { label: 'E-commerce & Retail', value: 'E-commerce & Retail' },
+            { label: 'Finance', value: 'Finance' },
+            { label: 'Media & Entertainment', value: 'Media & Entertainment' },
+            {
+              label: 'Medical Devices Industry',
+              value: 'Medical Devices Industry',
+            },
+            {
+              label: 'Transportation/Logistics',
+              value: 'Transportation/Logistics',
+            },
+            { label: 'Oil & Gas', value: 'Oil & Gas' },
+            {
+              label: 'Telecommunication Services',
+              value: 'Telecommunication Services',
+            },
+            {
+              label: 'Financial services/Investment/Banking/Insurance',
+              value: 'Financial services/Investment/Banking/Insurance',
+            },
+            { label: 'Chemical', value: 'Chemical' },
+            { label: 'FMCG', value: 'FMCG' },
+            { label: 'NGOs', value: 'NGOs' },
+            {
+              label: 'Business Process Outsourcing (BPO)',
+              value: 'Business Process Outsourcing (BPO)',
+            },
+            { label: 'Architecture', value: 'Architecture' },
+            { label: 'Consulting', value: 'Consulting' },
+            { label: 'Pharmaceutical', value: 'Pharmaceutical' },
+            { label: 'Tourism/Hospitality', value: 'Tourism/Hospitality' },
+            { label: 'Fashion', value: 'Fashion' },
+            { label: 'Creative Arts', value: 'Creative Arts' },
+            { label: 'Legal', value: 'Legal' },
+            {
+              label: 'Agriculture/Plantation',
+              value: 'Agriculture/Plantation',
+            },
+            { label: 'Education', value: 'Education' },
+            { label: 'Public Relations', value: 'Public Relations' },
+            { label: 'Other', value: 'Other' },
+          ]}
+        />
+        <Form.TextField
+          label={labelForSalaryDetails.otherIndustry}
+          name='otherIndustry'
+        />
         <Form.DropdownField
-          label={labelForSalaryDetails.specialization}
-          name='specialization'
-        >
-          <option value=''>Please choose</option>
-          <option value='Admin'>Admin</option>
-          <option value='Accounting'>Accounting</option>
-          <option value='Architect'>Architect</option>
-          <option value='Audit/Taxation'>Audit/Taxation</option>
-          <option value='Business Development'>Business Development</option>
-          <option value='Creative - Art direction/visual design/copywriting'>
-            Creative - Art direction/visual design/copywriting
-          </option>
-          <option value='Consulting'>Consulting</option>
-          <option value='Corporate Communications'>
-            Corporate Communications
-          </option>
-          <option value='Customer Service'>Customer Service</option>
-          <option value='Design'>Design</option>
-          <option value='Engineering'>Engineering</option>
-          <option value='Human Resources'>Human Resources</option>
-          <option value='Interior Design'>Interior Design</option>
-          <option value='IT - Data'>IT - Data</option>
-          <option value='IT - Hardware'>IT - Hardware</option>
-          <option value='IT - Network/DB/Sys'>IT - Network/DB/Sys</option>
-          <option value='IT - Software'>IT - Software</option>
-          <option value='Journalist/Editor'>Journalist/Editor</option>
-          <option value='Legal'>Legal</option>
-          <option value='Maintenance'>Maintenance</option>
-          <option value='Marketing'>Marketing</option>
-          <option value='Project Management'>Project Management</option>
-          <option value='Purchasing & Procurement'>
-            Puchasing & Procurement
-          </option>
-          <option value='Quantity Survey'>Quantity Survey</option>
-          <option value='Sales'>Sales</option>
-          <option value='Secretarial/Personal Assistant'>
-            Secretarial/Personal Assistant
-          </option>
-          <option value='Other'>Other</option>
-        </Form.DropdownField>
+          label={labelForSalaryDetails.specialisation}
+          name='specialisation'
+          options={[
+            { label: 'Please choose', value: '' },
+            { label: 'Admin', value: 'Admin' },
+            { label: 'Accounting', value: 'Accounting' },
+            { label: 'Architect', value: 'Architect' },
+            { label: 'Audit/Taxation', value: 'Audit/Taxation' },
+            { label: 'Business Development', value: 'Business Development' },
+            {
+              label: 'Creative - Art direction/visual design/copywriting',
+              value: 'Creative - Art direction/visual design/copywriting',
+            },
+            { label: 'Consulting', value: 'Consulting' },
+            {
+              label: 'Corporate Communications',
+              value: 'Corporate Communications',
+            },
+            { label: 'Customer Service', value: 'Customer Service' },
+            { label: 'Design', value: 'Design' },
+            { label: 'Engineering', value: 'Engineering' },
+            { label: 'Human Resources', value: 'Human Resources' },
+            { label: 'Interior Design', value: 'Interior Design' },
+            { label: 'IT - Data', value: 'IT - Data' },
+            { label: 'IT - Hardware', value: 'IT - Hardware' },
+            { label: 'IT - Network/DB/Sys', value: 'IT - Network/DB/Sys' },
+            { label: 'IT - Software', value: 'IT - Software' },
+            { label: 'Journalist/Editor', value: 'Journalist/Editor' },
+            { label: 'Legal', value: 'Legal' },
+            { label: 'Maintenance', value: 'Maintenance' },
+            { label: 'Marketing', value: 'Marketing' },
+            { label: 'Project Management', value: 'Project Management' },
+            {
+              label: 'Puchasing & Procurement',
+              value: 'Puchasing & Procurement',
+            },
+            { label: 'Quantity Survey', value: 'Quantity Survey' },
+            { label: 'Sales', value: 'Sales' },
+            {
+              label: 'Secretarial/Personal Assistant',
+              value: 'Secretarial/Personal Assistant',
+            },
+            { label: 'Other', value: 'Other' },
+          ]}
+        />
+        <Form.TextField
+          label={labelForSalaryDetails.otherSpecialisation}
+          name='otherSpecialisation'
+        />
         <Form.NumberField
           label={labelForSalaryDetails.averageWorkingHour}
           name='averageWorkingHour'
@@ -607,9 +638,9 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
         <Form.TextareaField name='thoughts' label={labelForThoughts.thoughts} />
         <div>
           <h1 className='font-medium text-lg text-gray-700'>
-            We might need you again in near future. Kami perlukan anda.
+            We might need you again in near future.
           </h1>
-          <p className='text-sm text-gray-700 mt-2 text-justify'>
+          <p className='text-sm text-gray-700 text-justify'>
             In order to make better use of the data in the future, we may need
             to obtain additional information via email, such as incomplete
             personal or demographic data or consent. To the extent that you are
@@ -619,7 +650,10 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
             be shared publicly. However, your email will only be private and
             used by MPG for future correspondence.
           </p>
-          <p className='text-sm text-gray-700 mt-4 text-justify'>
+          <h1 className='font-medium text-lg text-gray-700 mt-4'>
+            Kami perlukan anda.
+          </h1>
+          <p className='text-sm text-gray-700 text-justify'>
             Untuk mengguna pakai data yang telah diambil dengan lebih berkesan,
             pihak kami mungkin memerlukan lebih informasi di masa hadapan. Jika
             tidak keberatan, sila tinggalkan email anda supaya kami boleh
