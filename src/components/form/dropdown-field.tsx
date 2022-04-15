@@ -5,8 +5,7 @@ import { Field } from './field';
 import { ComposedFieldProps, groupProps } from './field.helper';
 
 export interface DropdownFieldProps
-  extends DropdownProps,
-    ComposedFieldProps,
+  extends ComposedFieldProps,
     Omit<DropdownProps, 'children'> {}
 
 export const DropdownField = React.forwardRef<
