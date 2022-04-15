@@ -7,7 +7,7 @@ import { borderByStatus } from './border';
 import { useFieldControlContext } from './field-context';
 
 export interface DropdownProps
-  extends React.ComponentPropsWithoutRef<'select'> {
+  extends Omit<React.ComponentPropsWithoutRef<'select'>, 'children'> {
   /**
    * callback to be invoked when input change. The parameter will
    * be the value instead of the event object
