@@ -15,13 +15,13 @@ export interface RadioFieldProps
     label: React.ReactNode;
     disabled?: boolean;
   }>;
-  allowOthers?: boolean;
+  allowOther?: boolean;
 }
 
 export const RadioField = (providedProps: RadioFieldProps) => {
   const {
     fieldProps,
-    controlProps: { options, allowOthers, ...radioProps },
+    controlProps: { options, allowOther, ...radioProps },
   } = groupProps(providedProps);
 
   const [othersValue, setOthersValue] = React.useState('');
@@ -40,9 +40,9 @@ export const RadioField = (providedProps: RadioFieldProps) => {
             key={i}
           />
         ))}
-        {allowOthers && (
+        {allowOther && (
           <div className='flex gap-3'>
-            <Radio value={othersValue} label='Others' />
+            <Radio value={othersValue} label='Other' />
             {othersValue === radioProps.value && (
               <TextInput
                 value={othersValue}

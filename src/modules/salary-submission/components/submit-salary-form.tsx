@@ -152,7 +152,7 @@ const SubmitSalaryPersonalDetailsForm = (props: {
               value: 'Sabahan Ethic',
             },
           ]}
-          allowOthers
+          allowOther
         />
         <Form.DropdownField
           label={labelForPersonalDetails.nationality}
@@ -202,7 +202,6 @@ const SubmitSalaryPersonalDetailsForm = (props: {
               value: 'PhD (Overseas)',
             },
           ]}
-          allowOthers
         />
         <div>
           <Button type='submit' className='w-full justify-center'>
