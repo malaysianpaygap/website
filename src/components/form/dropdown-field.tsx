@@ -4,7 +4,10 @@ import { Dropdown, DropdownProps } from './dropdown';
 import { Field } from './field';
 import { ComposedFieldProps, groupProps } from './field.helper';
 
-export interface DropdownFieldProps extends DropdownProps, ComposedFieldProps {}
+export interface DropdownFieldProps
+  extends DropdownProps,
+    ComposedFieldProps,
+    Omit<DropdownProps, 'children'> {}
 
 export const DropdownField = React.forwardRef<
   HTMLSelectElement,
