@@ -1,11 +1,11 @@
 import * as React from 'react';
 
+import { Field } from './field';
+import { ComposedFieldProps, groupProps } from './field.helper';
 import {
   SearchableDropdown,
   SearchableDropdownProps,
 } from './searchable-dropdown';
-import { Field } from './field';
-import { ComposedFieldProps, groupProps } from './field.helper';
 
 export interface SearchableDropdownFieldProps
   extends SearchableDropdownProps,
