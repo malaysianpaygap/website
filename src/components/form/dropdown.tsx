@@ -25,7 +25,6 @@ export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
     forwardedRef
   ) {
     const { inputId, status } = useFieldControlContext(id);
-    const [open, setOpen] = React.useState(false);
 
     return (
       <Downshift
@@ -47,6 +46,9 @@ export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
           getItemProps,
           getToggleButtonProps,
           inputValue,
+          openMenu,
+          closeMenu,
+          isOpen,
         }) => (
           <div
             ref={forwardedRef}
@@ -55,16 +57,19 @@ export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
             <div>
               <input
                 {...getInputProps()}
-                className='px-2.5 py-2.5 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 block min-w-0 w-full sm:text-sm border border-solid border-gray-300 text-left'
-                onClick={() => {
-                  setOpen(!open);
-                }}
-                onBlur={() => {
-                  setOpen(false);
-                }}
+                className={cls(
+                  'px-2.5 py-2.5 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 block min-w-0 w-full sm:text-sm border border-solid border-gray-300 text-left',
+                  status ? borderByStatus[status] : 'border-gray-300',
+                  inputProps.disabled && 'bg-gray-100 text-gray-400',
+                  className
+                )}
+                {...getInputProps({
+                  onFocus: openMenu,
+                  onBlur: closeMenu,
+                })}
               />
             </div>
-            {open && (
+            {isOpen && (
               <ul
                 {...getMenuProps()}
                 className={cls(
@@ -74,25 +79,37 @@ export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
                   className
                 )}
                 {...getToggleButtonProps()}
-                onClick={() => setOpen(!open)}
+                onClick={() => openMenu}
               >
-                {inputProps.options
-                  .filter(
-                    (item) => !inputValue || item.value.includes(inputValue)
-                  )
-                  .map((item, index) => (
-                    <li
-                      className='py-2 mx-2'
-                      key={item.value}
-                      {...getItemProps({
-                        key: item.value,
-                        item,
-                        index,
-                      })}
-                    >
-                      {item.label}
-                    </li>
-                  ))}
+                {inputProps.options.filter(
+                  (item) =>
+                    !inputValue ||
+                    item.value.toLowerCase().includes(inputValue.toLowerCase())
+                ).length > 0 ? (
+                  inputProps.options
+                    .filter(
+                      (item) =>
+                        !inputValue ||
+                        item.value
+                          .toLowerCase()
+                          .includes(inputValue.toLowerCase())
+                    )
+                    .map((item, index) => (
+                      <li
+                        className='py-2 mx-2'
+                        key={item.value}
+                        {...getItemProps({
+                          key: item.value,
+                          item,
+                          index,
+                        })}
+                      >
+                        {item.label}
+                      </li>
+                    ))
+                ) : (
+                  <li className='py-2 mx-2'> No Result </li>
+                )}
               </ul>
             )}
           </div>
