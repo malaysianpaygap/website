@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Button } from '@/components/buttons';
 import {
   DropdownField,
+  SearchableDropdownField,
   LinearScaleField,
   Radio,
   RadioCard,
@@ -295,32 +296,70 @@ export default function ComponentsPage() {
               <li>
                 <h2>DropdownField</h2>
                 <div className='flex flex-col flex-wrap gap-4'>
-                  <DropdownField
-                    label='Default'
-                    options={options}
-                  ></DropdownField>
-                  <DropdownField
-                    label='Disabled'
-                    disabled
-                    options={options}
-                  ></DropdownField>
+                  <DropdownField label='Default'>
+                    <option value='1'>One</option>
+                    <option value='2'>Two</option>
+                    <option value='3'>Three</option>
+                  </DropdownField>
+                  <DropdownField label='Disabled' disabled>
+                    <option value='1'>One</option>
+                    <option value='2'>Two</option>
+                    <option value='3'>Three</option>
+                  </DropdownField>
                   <DropdownField
                     label='Success'
                     status='success'
                     secondaryLabel='Optional'
-                    options={options}
-                  ></DropdownField>
-                  <DropdownField
-                    label='Warning'
-                    status='warning'
-                    options={options}
-                  ></DropdownField>
+                  >
+                    <option value='1'>One</option>
+                    <option value='2'>Two</option>
+                    <option value='3'>Three</option>
+                  </DropdownField>
+                  <DropdownField label='Warning' status='warning'>
+                    <option value='1'>One</option>
+                    <option value='2'>Two</option>
+                    <option value='3'>Three</option>
+                  </DropdownField>
                   <DropdownField
                     label='Error'
                     status='error'
                     helpText='Required'
+                  >
+                    <option value='1'>One</option>
+                    <option value='2'>Two</option>
+                    <option value='3'>Three</option>
+                  </DropdownField>
+                </div>
+              </li>
+              <li>
+                <h2>SearchableDropdownField</h2>
+                <div className='flex flex-col flex-wrap gap-4'>
+                  <SearchableDropdownField
+                    label='Default'
                     options={options}
-                  ></DropdownField>
+                  ></SearchableDropdownField>
+                  <SearchableDropdownField
+                    label='Disabled'
+                    disabled
+                    options={options}
+                  ></SearchableDropdownField>
+                  <SearchableDropdownField
+                    label='Success'
+                    status='success'
+                    secondaryLabel='Optional'
+                    options={options}
+                  ></SearchableDropdownField>
+                  <SearchableDropdownField
+                    label='Warning'
+                    status='warning'
+                    options={options}
+                  ></SearchableDropdownField>
+                  <SearchableDropdownField
+                    label='Error'
+                    status='error'
+                    helpText='Required'
+                    options={options}
+                  ></SearchableDropdownField>
                 </div>
               </li>
               <li>

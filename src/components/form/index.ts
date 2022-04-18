@@ -1,3 +1,7 @@
+export type { SearchableDropdownProps } from './searchable-dropdown';
+export { SearchableDropdown } from './searchable-dropdown';
+export type { SearchableDropdownFieldProps } from './searchable-dropdown-field';
+export { SearchableDropdownField } from './searchable-dropdown-field';
 export type { DropdownProps } from './dropdown';
 export { Dropdown } from './dropdown';
 export type { DropdownFieldProps } from './dropdown-field';

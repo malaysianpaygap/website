@@ -3,7 +3,6 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 
 import { countryOptions } from '@/lib/country-options';
-import { genderOptions } from '@/lib/gender-options';
 import { stateOptions } from '@/lib/state-options';
 
 import { ErrorAlert } from '@/components/alert';
@@ -138,8 +137,12 @@ const SubmitSalaryPersonalDetailsForm = (props: {
             label={labelForPersonalDetails.gender}
             name='gender'
             required
-            options={genderOptions}
-          ></Form.DropdownField>
+          >
+            <option value=''>Please choose</option>
+            <option value='female' label='Female' />
+            <option value='male' label='Male' />
+            <option value='others' label='Non-binary/others' />
+          </Form.DropdownField>
         </div>
         <Form.RadioField
           label={labelForPersonalDetails.race}
@@ -170,12 +173,12 @@ const SubmitSalaryPersonalDetailsForm = (props: {
           ]}
           allowOthers
         />
-        <Form.DropdownField
+        <Form.SearchableDropdownField
           label={labelForPersonalDetails.nationality}
           name='nationality'
           options={countryOptions}
           required
-        ></Form.DropdownField>
+        ></Form.SearchableDropdownField>
         <Form.RadioField
           label={labelForPersonalDetails.education}
           name='education'
@@ -362,12 +365,12 @@ const SubmitSalarySalaryDetailsForm = (props: {
             layout='horizontal'
           />
         </div>
-        <Form.DropdownField
+        <Form.SearchableDropdownField
           name='state'
           label={labelForSalaryDetails.state}
           options={stateOptions}
           required
-        ></Form.DropdownField>
+        ></Form.SearchableDropdownField>
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT

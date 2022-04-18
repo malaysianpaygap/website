@@ -11,6 +11,7 @@ import { createNamedContext } from '@/lib/create-named-context';
 import { useIsClient } from '@/hooks/use-is-client';
 
 import { DropdownField } from './dropdown-field';
+import { SearchableDropdownField } from './searchable-dropdown-field';
 import { FieldStatus } from './field-context';
 import { LinearScaleField } from './linear-scale-field';
 import { NumberField } from './number-field';
@@ -127,6 +128,7 @@ const makeFormControl = <
 
 export const Form = Object.assign(FormImpl, {
   DropdownField: makeFormControl(DropdownField),
+  SearchableDropdownField: makeFormControl(SearchableDropdownField),
   TextField: makeFormControl(TextField),
   TextareaField: makeFormControl(TextareaField),
   RadioField: makeFormControl(RadioField),
