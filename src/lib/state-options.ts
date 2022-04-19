@@ -7,59 +7,23 @@ export const stateOptions: Array<{
     value: 'Federal Territory of Kuala Lumpur',
   },
   {
-    label: 'Johor',
-    value: 'Johor',
-  },
-  {
     label: 'Federal Territory of Labuan',
     value: 'Federal Territory of Labuan',
   },
   {
-    label: 'Sabah',
-    value: 'Sabah',
+    label: 'Federal Territory of Putrajaya',
+    value: 'Federal Territory of Putrajaya',
   },
-  {
-    label: 'Sarawak',
-    value: 'Sarawak',
-  },
-  {
-    label: 'Pulau Pinang',
-    value: 'Pulau Pinang',
-  },
-  {
-    label: 'Pahang',
-    value: 'Pahang',
-  },
-  {
-    label: 'Perak',
-    value: 'Perak',
-  },
-  {
-    label: 'Kelantan',
-    value: 'Kelantan',
-  },
-  {
-    label: 'Terengganu',
-    value: 'Terengganu',
-  },
-  {
-    label: 'Perlis',
-    value: 'Perlis',
-  },
-  {
-    label: 'Selangor',
-    value: 'Selangor',
-  },
-  {
-    label: 'Kedah',
-    value: 'Kedah',
-  },
-  {
-    label: 'Melaka',
-    value: 'Melaka',
-  },
-  {
-    label: 'Negeri Sembilan',
-    value: 'Negeri Sembilan',
-  },
+  { label: 'Johor', value: 'Johor' },
+  { label: 'Kedah', value: 'Kedah' },
+  { label: 'Kelantan', value: 'Kelantan' },
+  { label: 'Malacca', value: 'Malacca' },
+  { label: 'Negeri Sembilan', value: 'Negeri Sembilan' },
+  { label: 'Pahang', value: 'Pahang' },
+  { label: 'Penang', value: 'Penang' },
+  { label: 'Perak', value: 'Perak' },
+  { label: 'Perlis', value: 'Perlis' },
+  { label: 'Sabah', value: 'Sabah' },
+  { label: 'Sarawak', value: 'Sarawak' },
+  { label: 'Terengganu', value: 'Terengganu' },
 ];

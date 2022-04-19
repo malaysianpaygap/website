@@ -296,39 +296,52 @@ export default function ComponentsPage() {
               <li>
                 <h2>DropdownField</h2>
                 <div className='flex flex-col flex-wrap gap-4'>
-                  <DropdownField label='Default'>
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
-                  <DropdownField label='Disabled' disabled>
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
+                  <DropdownField
+                    label='Default'
+                    options={[
+                      { value: '1', label: 'One' },
+                      { value: '2', label: 'Two' },
+                      { value: '3', label: 'Three' },
+                    ]}
+                  />
+                  <DropdownField
+                    label='Disabled'
+                    disabled
+                    options={[
+                      { value: '1', label: 'One' },
+                      { value: '2', label: 'Two' },
+                      { value: '3', label: 'Three' },
+                    ]}
+                  />
                   <DropdownField
                     label='Success'
                     status='success'
                     secondaryLabel='Optional'
-                  >
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
-                  <DropdownField label='Warning' status='warning'>
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
+                    options={[
+                      { value: '1', label: 'One' },
+                      { value: '2', label: 'Two' },
+                      { value: '3', label: 'Three' },
+                    ]}
+                  />
+                  <DropdownField
+                    label='Warning'
+                    status='warning'
+                    options={[
+                      { value: '1', label: 'One' },
+                      { value: '2', label: 'Two' },
+                      { value: '3', label: 'Three' },
+                    ]}
+                  />
                   <DropdownField
                     label='Error'
                     status='error'
                     helpText='Required'
-                  >
-                    <option value='1'>One</option>
-                    <option value='2'>Two</option>
-                    <option value='3'>Three</option>
-                  </DropdownField>
+                    options={[
+                      { value: '1', label: 'One' },
+                      { value: '2', label: 'Two' },
+                      { value: '3', label: 'Three' },
+                    ]}
+                  />
                 </div>
               </li>
               <li>

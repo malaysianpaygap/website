@@ -155,6 +155,8 @@ export const formatErrors = <FormValues extends object>(
           errs.push(`${labels[key]} is required.`);
         } else if (error.type === 'minLength' && error.message) {
           errs.push(`${labels[key]} ${error.message}.`);
+        } else if (error.type === 'pattern' && error.message) {
+          errs.push(`${labels[key]} is invalid.`);
         } else {
           // eslint-disable-next-line no-console
           console.log({ error });
