@@ -179,6 +179,7 @@ const SubmitSalaryPersonalDetailsForm = (props: {
           name='nationality'
           required
           options={[...countryOptions]}
+          id='nationality-dropdown'
         />
         <Form.RadioField
           label={labelForPersonalDetails.education}
@@ -376,6 +377,7 @@ const SubmitSalarySalaryDetailsForm = (props: {
           label={labelForSalaryDetails.state}
           required
           options={[...stateOptions]}
+          id='state-dropdown'
         />
         <Form.RadioField
           label={labelForSalaryDetails.typeOfCompany}

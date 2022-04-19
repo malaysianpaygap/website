@@ -350,29 +350,34 @@ export default function ComponentsPage() {
                   <SearchableDropdownField
                     label='Default'
                     options={options}
-                  ></SearchableDropdownField>
+                    id='default-searchable-dropdown'
+                  />
                   <SearchableDropdownField
                     label='Disabled'
                     disabled
                     options={options}
-                  ></SearchableDropdownField>
+                    id='disabled-searchable-dropdown'
+                  />
                   <SearchableDropdownField
                     label='Success'
                     status='success'
                     secondaryLabel='Optional'
                     options={options}
-                  ></SearchableDropdownField>
+                    id='success-searchable-dropdown'
+                  />
                   <SearchableDropdownField
                     label='Warning'
                     status='warning'
                     options={options}
-                  ></SearchableDropdownField>
+                    id='warning-searchable-dropdown'
+                  />
                   <SearchableDropdownField
                     label='Error'
                     status='error'
                     helpText='Required'
                     options={options}
-                  ></SearchableDropdownField>
+                    id='error-searchable-dropdown'
+                  />
                 </div>
               </li>
               <li>

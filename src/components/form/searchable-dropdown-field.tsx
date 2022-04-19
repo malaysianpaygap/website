@@ -12,7 +12,7 @@ export interface SearchableDropdownFieldProps
     ComposedFieldProps {}
 
 export const SearchableDropdownField = React.forwardRef<
-  HTMLSelectElement,
+  HTMLInputElement,
   SearchableDropdownFieldProps
 >(function SearchableDropdownField(props, ref) {
   const { fieldProps, controlProps } = groupProps(props);

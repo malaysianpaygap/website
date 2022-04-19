@@ -7,23 +7,24 @@ import { borderByStatus } from './border';
 import { useFieldControlContext } from './field-context';
 
 export interface SearchableDropdownProps
-  extends React.ComponentPropsWithoutRef<'select'> {
-  /**
-   * callback to be invoked when input change. The parameter will
-   * be the value instead of the event object
-   */
+  extends React.ComponentPropsWithoutRef<'input'> {
+  id: string; // id is required for this component to be SSR-friendly
   options: Array<{
     label: string;
     value: string;
   }>;
+  /**
+   * callback to be invoked when input change. The parameter will
+   * be the value instead of the event object
+   */
   onChangeValue?: (value: string) => void;
 }
 
 export const SearchableDropdown = React.forwardRef<
-  HTMLSelectElement,
+  HTMLInputElement,
   SearchableDropdownProps
 >(function SearchableDropdown(
-  { className, onChangeValue, onChange, id, ...inputProps },
+  { className, onChangeValue, id, options, ...inputProps },
   forwardedRef
 ) {
   const { inputId, status } = useFieldControlContext(id);
@@ -44,17 +45,14 @@ export const SearchableDropdown = React.forwardRef<
       {({
         getInputProps,
         getMenuProps,
-        getRootProps,
         getItemProps,
         inputValue,
         openMenu,
         closeMenu,
+        highlightedIndex,
         isOpen,
       }) => (
-        <div
-          ref={forwardedRef}
-          {...getRootProps(undefined, { suppressRefError: true })}
-        >
+        <div>
           <div>
             <input
               className={cls(
@@ -65,8 +63,10 @@ export const SearchableDropdown = React.forwardRef<
               )}
               placeholder='Please choose'
               {...getInputProps({
+                ...inputProps,
                 onFocus: openMenu,
                 onBlur: closeMenu,
+                ref: forwardedRef,
               })}
             />
           </div>
@@ -75,19 +75,19 @@ export const SearchableDropdown = React.forwardRef<
               <ul
                 {...getMenuProps()}
                 className={cls(
-                  'absolute z-10 w-full border border-solid border-gray-300 max-h-56 rounded-md text-base overflow-auto sm:text-sm',
+                  'absolute z-10 w-full border border-solid border-gray-300 max-h-56 rounded-md text-base overflow-auto sm:text-sm bg-white',
                   status ? borderByStatus[status] : 'border-gray-300',
                   inputProps.disabled && 'bg-gray-100 text-gray-400',
                   className
                 )}
                 onClick={() => openMenu}
               >
-                {inputProps.options.filter(
+                {options.filter(
                   (item) =>
                     !inputValue ||
                     item.value.toLowerCase().includes(inputValue.toLowerCase())
                 ).length > 0 ? (
-                  inputProps.options
+                  options
                     .filter(
                       (item) =>
                         !inputValue ||
@@ -97,7 +97,10 @@ export const SearchableDropdown = React.forwardRef<
                     )
                     .map((item, index) => (
                       <li
-                        className='px-2 py-2 bg-white'
+                        className={cls(
+                          'px-2 py-2',
+                          highlightedIndex === index && 'bg-gray-100'
+                        )}
                         key={item.value}
                         {...getItemProps({
                           key: item.value,
@@ -109,7 +112,7 @@ export const SearchableDropdown = React.forwardRef<
                       </li>
                     ))
                 ) : (
-                  <li className='py-2 mx-2'> No Result </li>
+                  <li className='py-2 mx-2 text-gray-500 text-sm'>No Result</li>
                 )}
               </ul>
             )}
