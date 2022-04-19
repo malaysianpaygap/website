@@ -46,7 +46,6 @@ export const SearchableDropdown = React.forwardRef<
         getMenuProps,
         getRootProps,
         getItemProps,
-        getToggleButtonProps,
         inputValue,
         openMenu,
         closeMenu,
