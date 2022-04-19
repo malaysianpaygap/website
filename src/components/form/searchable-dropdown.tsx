@@ -71,49 +71,51 @@ export const SearchableDropdown = React.forwardRef<
               })}
             />
           </div>
-          {isOpen && (
-            <ul
-              {...getMenuProps()}
-              className={cls(
-                'py-2.5 block min-w-0 w-full sm:text-sm rounded-md shadow-sm focus:border-primary-300 border border-solid border-gray-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50',
-                status ? borderByStatus[status] : 'border-gray-300',
-                inputProps.disabled && 'bg-gray-100 text-gray-400',
-                className
-              )}
-              {...getToggleButtonProps()}
-              onClick={() => openMenu}
-            >
-              {inputProps.options.filter(
-                (item) =>
-                  !inputValue ||
-                  item.value.toLowerCase().includes(inputValue.toLowerCase())
-              ).length > 0 ? (
-                inputProps.options
-                  .filter(
-                    (item) =>
-                      !inputValue ||
-                      item.value
-                        .toLowerCase()
-                        .includes(inputValue.toLowerCase())
-                  )
-                  .map((item, index) => (
-                    <li
-                      className='py-2 mx-2'
-                      key={item.value}
-                      {...getItemProps({
-                        key: item.value,
-                        item,
-                        index,
-                      })}
-                    >
-                      {item.label}
-                    </li>
-                  ))
-              ) : (
-                <li className='py-2 mx-2'> No Result </li>
-              )}
-            </ul>
-          )}
+          <div className='bg-white relative'>
+            {isOpen && (
+              <ul
+                {...getMenuProps()}
+                className={cls(
+                  'absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm',
+                  status ? borderByStatus[status] : 'border-gray-300',
+                  inputProps.disabled && 'bg-gray-100 text-gray-400',
+                  className
+                )}
+                {...getToggleButtonProps()}
+                onClick={() => openMenu}
+              >
+                {inputProps.options.filter(
+                  (item) =>
+                    !inputValue ||
+                    item.value.toLowerCase().includes(inputValue.toLowerCase())
+                ).length > 0 ? (
+                  inputProps.options
+                    .filter(
+                      (item) =>
+                        !inputValue ||
+                        item.value
+                          .toLowerCase()
+                          .includes(inputValue.toLowerCase())
+                    )
+                    .map((item, index) => (
+                      <li
+                        className='py-2 mx-2 bg-white'
+                        key={item.value}
+                        {...getItemProps({
+                          key: item.value,
+                          item,
+                          index,
+                        })}
+                      >
+                        {item.label}
+                      </li>
+                    ))
+                ) : (
+                  <li className='py-2 mx-2'> No Result </li>
+                )}
+              </ul>
+            )}
+          </div>
         </div>
       )}
     </Downshift>
