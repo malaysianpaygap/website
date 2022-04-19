@@ -12,12 +12,17 @@ export interface DropdownProps
    * callback to be invoked when input change. The parameter will
    * be the value instead of the event object
    */
+  options: Array<{
+    value: string;
+    label: React.ReactNode;
+    disabled?: boolean;
+  }>;
   onChangeValue?: (value: string) => void;
 }
 
 export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
   function Dropdown(
-    { className, onChangeValue, onChange, id, ...inputProps },
+    { className, onChangeValue, onChange, id, options, ...inputProps },
     forwardedRef
   ) {
     const { inputId, status } = useFieldControlContext(id);
@@ -37,7 +42,14 @@ export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(
         )}
         {...inputProps}
         ref={forwardedRef}
-      />
+        placeholder='Please Select'
+      >
+        {options.map((option, i) => (
+          <option value={option.value} key={i} disabled={option.disabled}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     );
   }
 );

@@ -136,12 +136,13 @@ const SubmitSalaryPersonalDetailsForm = (props: {
             label={labelForPersonalDetails.gender}
             name='gender'
             required
-          >
-            <option value=''>Please choose</option>
-            <option value='female' label='Female' />
-            <option value='male' label='Male' />
-            <option value='others' label='Non-binary/others' />
-          </Form.DropdownField>
+            options={[
+              { label: 'Please choose', value: '' },
+              { label: 'Female', value: 'female' },
+              { label: 'Male', value: 'male' },
+              { label: 'Non-binary/others', value: 'other' },
+            ]}
+          />
         </div>
         <Form.RadioField
           label={labelForPersonalDetails.race}
@@ -170,20 +171,14 @@ const SubmitSalaryPersonalDetailsForm = (props: {
               value: 'Sabahan Ethic',
             },
           ]}
-          allowOthers
+          allowOther
         />
         <Form.DropdownField
           label={labelForPersonalDetails.nationality}
           name='nationality'
           required
-        >
-          <option value=''>Please choose</option>
-          {countryOptions.map((country) => (
-            <option value={country.value} key={country.value}>
-              {country.label}
-            </option>
-          ))}
-        </Form.DropdownField>
+          options={[{ label: 'Please choose', value: '' }, ...countryOptions]}
+        />
         <Form.RadioField
           label={labelForPersonalDetails.education}
           name='education'
@@ -226,7 +221,6 @@ const SubmitSalaryPersonalDetailsForm = (props: {
               value: 'PhD (Overseas)',
             },
           ]}
-          allowOthers
         />
         <div>
           <Button type='submit' className='w-full justify-center'>
@@ -247,7 +241,9 @@ interface SalaryDetails {
   state: string;
   typeOfCompany: string;
   industry: string;
-  specialization: string;
+  otherIndustry: string;
+  specialisation: string;
+  otherSpecialisation: string;
   averageWorkingHour: string;
   averageWorkingDay: string;
   monthSalaryInMyr: string;
@@ -268,10 +264,12 @@ const labelForSalaryDetails: Record<keyof SalaryDetails, string> = {
   typeOfCompany:
     'What type of company do you work for? (Jenis syarikat yang anda bekerja?)',
   industry: 'Industry (Industri)',
-  specialization: 'Job Specialisation (Pengkhususan Pekerjaan)',
-  averageWorkingDay:
-    'Average working hours per day (Purata jam bekerja dalam sehari)',
+  otherIndustry: `If selected 'Other' for Industry, please clarify (Jika anda memilih ‘Other’ untuk Industri, sila nyatakan)`,
+  specialisation: 'Job Specialisation (Pengkhususan Pekerjaan)',
+  otherSpecialisation: `If selected 'Other' for Job Specialisation, please clarify (Jika anda memilih ‘Other’ untuk Pengkhususan Pekerjaan, sila nyatakan)`,
   averageWorkingHour:
+    'Average working hours per day (Purata jam bekerja dalam sehari)',
+  averageWorkingDay:
     'Average working days per week (Purata hari bekerja dalam seminggu)',
   monthSalaryInMyr:
     'Monthly salary in Ringgit Malaysia (Gross: before EPF, tax deduction) (Gaji bulanan dalam Ringgit Malaysia (Gaji Kasar: Sebelum KWSP & tolakan cukai))',
@@ -297,7 +295,9 @@ const SubmitSalarySalaryDetailsForm = (props: {
       state: '',
       typeOfCompany: '',
       industry: '',
-      specialization: '',
+      otherIndustry: '',
+      specialisation: '',
+      otherSpecialisation: '',
       averageWorkingDay: '',
       averageWorkingHour: '',
       monthSalaryInMyr: '',
@@ -374,20 +374,246 @@ const SubmitSalarySalaryDetailsForm = (props: {
           name='state'
           label={labelForSalaryDetails.state}
           required
-        >
-          <option value=''>Please select</option>
-          <option value='Federal Territory of Kuala Lumpur'>
-            Federal Territory of Kuala Lumpur
-          </option>
-          <option value='Federal Territory of Labuan'>
-            Federal Territory of Labuan
-          </option>
-          <option value='Federal Territory of Putrajaya'>
-            Federal Territory of Putrajaya
-          </option>
-          <option value='Johor'>Johor</option>
-          <option value='Kedah'>Kedah</option>
-        </Form.DropdownField>
+          options={[
+            { label: 'Please select', value: '' },
+            {
+              label: 'Federal Territory of Kuala Lumpur',
+              value: 'Federal Territory of Kuala Lumpur',
+            },
+            {
+              label: 'Federal Territory of Labuan',
+              value: 'Federal Territory of Labuan',
+            },
+            {
+              label: 'Federal Territory of Putrajaya',
+              value: 'Federal Territory of Putrajaya',
+            },
+            { label: 'Johor', value: 'Johor' },
+            { label: 'Kedah', value: 'Kedah' },
+            { label: 'Kelantan', value: 'Kelantan' },
+            { label: 'Malacca', value: 'Malacca' },
+            { label: 'Negeri Sembilan', value: 'Negeri Sembilan' },
+            { label: 'Pahang', value: 'Pahang' },
+            { label: 'Penang', value: 'Penang' },
+            { label: 'Perak', value: 'Perak' },
+            { label: 'Perlis', value: 'Perlis' },
+            { label: 'Sabah', value: 'Sabah' },
+            { label: 'Sarawak', value: 'Sarawak' },
+            { label: 'Terengganu', value: 'Terengganu' },
+          ]}
+        />
+        <Form.RadioField
+          label={labelForSalaryDetails.typeOfCompany}
+          name='typeOfCompany'
+          required
+          options={[
+            {
+              label: 'Freelance/Self-employed (Bekerja Sendiri)',
+              value: 'Freelance/Self-employed (Bekerja Sendiri)',
+            },
+            {
+              label: 'Government-linked companies',
+              value: 'Government-linked companies',
+            },
+            {
+              label: 'Multinational corporation',
+              value: 'Multinational corporation',
+            },
+            {
+              label: 'Non-profit',
+              value: 'Non-profit',
+            },
+            {
+              label: 'Public Sector',
+              value: 'Public Sector',
+            },
+            {
+              label: 'Private large enterprises (local)',
+              value: 'Private large enterprises (local)',
+            },
+            {
+              label: 'Small & medium-sized enterprises',
+              value: 'Small & medium-sized enterprises',
+            },
+            {
+              label: 'Start-up',
+              value: 'Start-up',
+            },
+          ]}
+        />
+        <Form.DropdownField
+          label={labelForSalaryDetails.industry}
+          name='industry'
+          required
+          options={[
+            {
+              label: 'Please choose',
+              value: '',
+            },
+            {
+              label: 'Healthcare/Health services',
+              value: 'Healthcare/Health services',
+            },
+            {
+              label: 'Utilities (water, gas, electricity)',
+              value: 'Utilities (water, gas, electricity)',
+            },
+            { label: 'Aviation', value: 'Aviation' },
+            { label: 'Construction', value: 'Construction' },
+            { label: 'Automotive', value: 'Automotive' },
+            { label: 'Supply Chain', value: 'Supply Chain' },
+            { label: 'Real Estate', value: 'Real Estate' },
+            { label: 'Engineering', value: 'Engineering' },
+            { label: 'Manufacturing', value: 'Manufacturing' },
+            { label: 'Technology/IT/Data', value: 'Technology/IT/Data' },
+            { label: 'Web3', value: 'Web3' },
+            { label: 'Food & Beverage', value: 'Food & Beverage' },
+            {
+              label: 'Hardware & Semiconductor',
+              value: 'Hardware & Semiconductor',
+            },
+            { label: 'Gaming', value: 'Gaming' },
+            { label: 'Recruitment', value: 'Recruitment' },
+            { label: 'Public Service', value: 'Public Service' },
+            { label: 'Veterinary', value: 'Veterinary' },
+            { label: 'Fitness', value: 'Fitness' },
+            { label: 'E-commerce & Retail', value: 'E-commerce & Retail' },
+            { label: 'Finance', value: 'Finance' },
+            { label: 'Media & Entertainment', value: 'Media & Entertainment' },
+            {
+              label: 'Medical Devices Industry',
+              value: 'Medical Devices Industry',
+            },
+            {
+              label: 'Transportation/Logistics',
+              value: 'Transportation/Logistics',
+            },
+            { label: 'Oil & Gas', value: 'Oil & Gas' },
+            {
+              label: 'Telecommunication Services',
+              value: 'Telecommunication Services',
+            },
+            {
+              label: 'Financial services/Investment/Banking/Insurance',
+              value: 'Financial services/Investment/Banking/Insurance',
+            },
+            { label: 'Chemical', value: 'Chemical' },
+            { label: 'FMCG', value: 'FMCG' },
+            { label: 'NGOs', value: 'NGOs' },
+            {
+              label: 'Business Process Outsourcing (BPO)',
+              value: 'Business Process Outsourcing (BPO)',
+            },
+            { label: 'Architecture', value: 'Architecture' },
+            { label: 'Consulting', value: 'Consulting' },
+            { label: 'Pharmaceutical', value: 'Pharmaceutical' },
+            { label: 'Tourism/Hospitality', value: 'Tourism/Hospitality' },
+            { label: 'Fashion', value: 'Fashion' },
+            { label: 'Creative Arts', value: 'Creative Arts' },
+            { label: 'Legal', value: 'Legal' },
+            {
+              label: 'Agriculture/Plantation',
+              value: 'Agriculture/Plantation',
+            },
+            { label: 'Education', value: 'Education' },
+            { label: 'Public Relations', value: 'Public Relations' },
+            { label: 'Other', value: 'Other' },
+          ]}
+        />
+        <Form.TextField
+          label={labelForSalaryDetails.otherIndustry}
+          name='otherIndustry'
+        />
+        <Form.DropdownField
+          label={labelForSalaryDetails.specialisation}
+          name='specialisation'
+          options={[
+            { label: 'Please choose', value: '' },
+            { label: 'Admin', value: 'Admin' },
+            { label: 'Accounting', value: 'Accounting' },
+            { label: 'Architect', value: 'Architect' },
+            { label: 'Audit/Taxation', value: 'Audit/Taxation' },
+            { label: 'Business Development', value: 'Business Development' },
+            {
+              label: 'Creative - Art direction/visual design/copywriting',
+              value: 'Creative - Art direction/visual design/copywriting',
+            },
+            { label: 'Consulting', value: 'Consulting' },
+            {
+              label: 'Corporate Communications',
+              value: 'Corporate Communications',
+            },
+            { label: 'Customer Service', value: 'Customer Service' },
+            { label: 'Design', value: 'Design' },
+            { label: 'Engineering', value: 'Engineering' },
+            { label: 'Human Resources', value: 'Human Resources' },
+            { label: 'Interior Design', value: 'Interior Design' },
+            { label: 'IT - Data', value: 'IT - Data' },
+            { label: 'IT - Hardware', value: 'IT - Hardware' },
+            { label: 'IT - Network/DB/Sys', value: 'IT - Network/DB/Sys' },
+            { label: 'IT - Software', value: 'IT - Software' },
+            { label: 'Journalist/Editor', value: 'Journalist/Editor' },
+            { label: 'Legal', value: 'Legal' },
+            { label: 'Maintenance', value: 'Maintenance' },
+            { label: 'Marketing', value: 'Marketing' },
+            { label: 'Project Management', value: 'Project Management' },
+            {
+              label: 'Puchasing & Procurement',
+              value: 'Puchasing & Procurement',
+            },
+            { label: 'Quantity Survey', value: 'Quantity Survey' },
+            { label: 'Sales', value: 'Sales' },
+            {
+              label: 'Secretarial/Personal Assistant',
+              value: 'Secretarial/Personal Assistant',
+            },
+            { label: 'Other', value: 'Other' },
+          ]}
+        />
+        <Form.TextField
+          label={labelForSalaryDetails.otherSpecialisation}
+          name='otherSpecialisation'
+        />
+        <Form.NumberField
+          label={labelForSalaryDetails.averageWorkingHour}
+          name='averageWorkingHour'
+          required
+          decimalPlaces={1}
+          max={24}
+        />
+        <Form.NumberField
+          label={labelForSalaryDetails.averageWorkingDay}
+          name='averageWorkingDay'
+          required
+          decimalPlaces={1}
+          max={7}
+        />
+        <Form.NumberField
+          label={labelForSalaryDetails.monthSalaryInMyr}
+          name='monthSalaryInMyr'
+          required
+          decimalPlaces={0}
+        />
+        <Form.NumberField
+          label={labelForSalaryDetails.firstJobSalaryInMyr}
+          name='firstJobSalaryInMyr'
+          required
+          decimalPlaces={0}
+        />
+        <Form.LinearScaleField
+          label={labelForSalaryDetails.salarySatisfaction}
+          name='salarySatisfaction'
+          required
+          fromLabel='Very unhappy (Sangat sedih)'
+          toLabel='Very happy (Sangat gembira)'
+        />
+        <Form.LinearScaleField
+          label={labelForSalaryDetails.overallJobSatisfaction}
+          name='overallJobSatisfaction'
+          required
+          fromLabel='Very unsatisfied (Sangat tidak berpuas hati)'
+          toLabel='Very satisfied (Sangat berpuas hati)'
+        />
         <div>
           <Button type='submit' className='w-full justify-center'>
             NEXT
@@ -400,11 +626,13 @@ const SubmitSalarySalaryDetailsForm = (props: {
 
 interface ThoughtsAndVerificationDetails {
   thoughts: string;
+  email: string;
 }
 
 const labelForThoughts: Record<keyof ThoughtsAndVerificationDetails, string> = {
   thoughts:
     'Additional thoughts/insights you would like to share (Kongsikan pendapat / luahan hati anda)',
+  email: 'Email address (Emel)',
 };
 
 const SubmitSalaryThoughtsAndVerificationForm = (props: {
@@ -414,6 +642,7 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
   const form = useForm({
     defaultValues: props.initialValues || {
       thoughts: '',
+      email: '',
     },
   });
 
@@ -425,6 +654,45 @@ const SubmitSalaryThoughtsAndVerificationForm = (props: {
       <div className='space-y-8'>
         <ErrorAlert errors={formErrors} />
         <Form.TextareaField name='thoughts' label={labelForThoughts.thoughts} />
+        <div>
+          <h1 className='font-medium text-lg text-gray-700'>
+            We might need you again in near future.
+          </h1>
+          <p className='text-sm text-gray-700 text-justify'>
+            In order to make better use of the data in the future, we may need
+            to obtain additional information via email, such as incomplete
+            personal or demographic data or consent. To the extent that you are
+            willing, please provide your email address for our future reference.
+            Please note that we will not share your personal information with
+            any other parties, such as marketing companies. Your submission will
+            be shared publicly. However, your email will only be private and
+            used by MPG for future correspondence.
+          </p>
+          <h1 className='font-medium text-lg text-gray-700 mt-4'>
+            Kami perlukan anda.
+          </h1>
+          <p className='text-sm text-gray-700 text-justify'>
+            Untuk mengguna pakai data yang telah diambil dengan lebih berkesan,
+            pihak kami mungkin memerlukan lebih informasi di masa hadapan. Jika
+            tidak keberatan, sila tinggalkan email anda supaya kami boleh
+            hubungi anda jika berlaku perkara seperti “Informasi tidak lengkap,
+            data demografik atau berkenaan persetujuan”. Harap maklum, pihak
+            kami tidak akan berkongsi maklumat peribadi anda kepada pihak
+            ketiga, contohnya seperti agensi pemasaran. Penyerahan data anda
+            akan dikongsi kepada pihak awam, tetapi emel anda tidak akan
+            dikongsi & hanya akan digunakan oleh MPG untuk menghubungi anda.
+          </p>
+        </div>
+        <Form.TextField
+          label={labelForThoughts.email}
+          name='email'
+          rules={{
+            pattern: {
+              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+              message: 'invalid email address',
+            },
+          }}
+        />
         <div>
           <Button type='submit' className='w-full justify-center'>
             SUBMIT
