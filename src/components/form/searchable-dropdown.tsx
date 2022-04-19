@@ -72,17 +72,16 @@ export const SearchableDropdown = React.forwardRef<
               })}
             />
           </div>
-          <div className='bg-white relative'>
+          <div className='relative'>
             {isOpen && (
               <ul
                 {...getMenuProps()}
                 className={cls(
-                  'absolute z-10 w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 border border-solid border-gray-300 bg-white max-h-56 rounded-md text-base overflow-auto sm:text-sm',
+                  'absolute z-10 w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 border border-solid border-gray-300 max-h-56 rounded-md text-base overflow-auto sm:text-sm',
                   status ? borderByStatus[status] : 'border-gray-300',
                   inputProps.disabled && 'bg-gray-100 text-gray-400',
                   className
                 )}
-                {...getToggleButtonProps()}
                 onClick={() => openMenu}
               >
                 {inputProps.options.filter(
