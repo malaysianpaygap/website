@@ -8,6 +8,7 @@ import {
   Radio,
   RadioCard,
   RadioField,
+  SearchableDropdownField,
   TextareaField,
   TextField,
 } from '@/components/form';
@@ -26,11 +27,26 @@ import { Skeleton } from '@/components/skeleton';
 export default function ComponentsPage() {
   const [mode, setMode] = React.useState<'dark' | 'light'>('light');
   const [color] = React.useState('sky');
+
   function toggleMode() {
     return mode === 'dark' ? setMode('light') : setMode('dark');
   }
 
   const textColor = mode === 'dark' ? 'text-gray-300' : 'text-gray-600';
+  const options = [
+    {
+      label: 'One',
+      value: 'One',
+    },
+    {
+      label: 'Two',
+      value: 'Two',
+    },
+    {
+      label: 'Three',
+      value: 'Three',
+    },
+  ];
 
   return (
     <Layout>
@@ -325,6 +341,42 @@ export default function ComponentsPage() {
                       { value: '2', label: 'Two' },
                       { value: '3', label: 'Three' },
                     ]}
+                  />
+                </div>
+              </li>
+              <li>
+                <h2>SearchableDropdownField</h2>
+                <div className='flex flex-col flex-wrap gap-4'>
+                  <SearchableDropdownField
+                    label='Default'
+                    options={options}
+                    id='default-searchable-dropdown'
+                  />
+                  <SearchableDropdownField
+                    label='Disabled'
+                    disabled
+                    options={options}
+                    id='disabled-searchable-dropdown'
+                  />
+                  <SearchableDropdownField
+                    label='Success'
+                    status='success'
+                    secondaryLabel='Optional'
+                    options={options}
+                    id='success-searchable-dropdown'
+                  />
+                  <SearchableDropdownField
+                    label='Warning'
+                    status='warning'
+                    options={options}
+                    id='warning-searchable-dropdown'
+                  />
+                  <SearchableDropdownField
+                    label='Error'
+                    status='error'
+                    helpText='Required'
+                    options={options}
+                    id='error-searchable-dropdown'
                   />
                 </div>
               </li>

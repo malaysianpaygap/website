@@ -15,6 +15,7 @@ import { FieldStatus } from './field-context';
 import { LinearScaleField } from './linear-scale-field';
 import { NumberField } from './number-field';
 import { RadioField } from './radio-field';
+import { SearchableDropdownField } from './searchable-dropdown-field';
 import { TextField } from './text-field';
 import { TextareaField } from './textarea-field';
 
@@ -127,6 +128,7 @@ const makeFormControl = <
 
 export const Form = Object.assign(FormImpl, {
   DropdownField: makeFormControl(DropdownField),
+  SearchableDropdownField: makeFormControl(SearchableDropdownField),
   TextField: makeFormControl(TextField),
   TextareaField: makeFormControl(TextareaField),
   RadioField: makeFormControl(RadioField),

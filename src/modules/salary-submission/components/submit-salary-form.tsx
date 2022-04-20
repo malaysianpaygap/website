@@ -3,6 +3,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 
 import { countryOptions } from '@/lib/country-options';
+import { stateOptions } from '@/lib/state-options';
 
 import { ErrorAlert } from '@/components/alert';
 import { Button } from '@/components/buttons';
@@ -173,11 +174,12 @@ const SubmitSalaryPersonalDetailsForm = (props: {
           ]}
           allowOther
         />
-        <Form.DropdownField
+        <Form.SearchableDropdownField
           label={labelForPersonalDetails.nationality}
           name='nationality'
           required
-          options={[{ label: 'Please choose', value: '' }, ...countryOptions]}
+          options={[...countryOptions]}
+          id='nationality-dropdown'
         />
         <Form.RadioField
           label={labelForPersonalDetails.education}
@@ -370,37 +372,12 @@ const SubmitSalarySalaryDetailsForm = (props: {
             layout='horizontal'
           />
         </div>
-        <Form.DropdownField
+        <Form.SearchableDropdownField
           name='state'
           label={labelForSalaryDetails.state}
           required
-          options={[
-            { label: 'Please select', value: '' },
-            {
-              label: 'Federal Territory of Kuala Lumpur',
-              value: 'Federal Territory of Kuala Lumpur',
-            },
-            {
-              label: 'Federal Territory of Labuan',
-              value: 'Federal Territory of Labuan',
-            },
-            {
-              label: 'Federal Territory of Putrajaya',
-              value: 'Federal Territory of Putrajaya',
-            },
-            { label: 'Johor', value: 'Johor' },
-            { label: 'Kedah', value: 'Kedah' },
-            { label: 'Kelantan', value: 'Kelantan' },
-            { label: 'Malacca', value: 'Malacca' },
-            { label: 'Negeri Sembilan', value: 'Negeri Sembilan' },
-            { label: 'Pahang', value: 'Pahang' },
-            { label: 'Penang', value: 'Penang' },
-            { label: 'Perak', value: 'Perak' },
-            { label: 'Perlis', value: 'Perlis' },
-            { label: 'Sabah', value: 'Sabah' },
-            { label: 'Sarawak', value: 'Sarawak' },
-            { label: 'Terengganu', value: 'Terengganu' },
-          ]}
+          options={[...stateOptions]}
+          id='state-dropdown'
         />
         <Form.RadioField
           label={labelForSalaryDetails.typeOfCompany}
