@@ -6,14 +6,16 @@ import reader from 'xlsx';
 
 import { IEmploymentOptions } from '@/shared/interface';
 
-const filename = path.join('./public/Industry__Job_Specs_List.xlsx');
-
 const SHEETS = {
   industries: 'Industry',
   specialisation: 'Job Specialisation',
 };
 
 export default function constant(_: NextApiRequest, res: NextApiResponse) {
+  const filename = path.join(
+    process.cwd(),
+    '/public/Industry__Job_Specs_List.xlsx'
+  );
   const file = reader.readFile(filename);
 
   const data: IEmploymentOptions = {

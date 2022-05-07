@@ -22,7 +22,10 @@ export default function SubmitSalaryPage(props: IProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const res = await fetch(`http://localhost:3000/api/constant`);
+  const assetPrefix = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
+  const res = await fetch(`${assetPrefix}/api/constant`);
   const { data } = await res.json();
 
   return {
