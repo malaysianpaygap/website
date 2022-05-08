@@ -5,7 +5,7 @@
   "scripts": {
     "predev": "ts-node ./scripts",
     "dev": "next dev",
-    "build": "next build",
+    "build": "ts-node ./scripts && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint src --fix && yarn format",
