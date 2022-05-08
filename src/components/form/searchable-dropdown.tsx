@@ -1,11 +1,8 @@
 import Downshift from 'downshift';
+import { matchSorter } from 'match-sorter';
 import * as React from 'react';
 
 import { cls } from '@/lib/clsxm';
-import {
-  filterOptionsByQuery,
-  SearchableDropdownOption,
-} from '@/lib/dropdown-search';
 
 import { borderByStatus } from './border';
 import { useFieldControlContext } from './field-context';
@@ -13,7 +10,11 @@ import { useFieldControlContext } from './field-context';
 export interface SearchableDropdownProps
   extends React.ComponentPropsWithoutRef<'input'> {
   id: string; // id is required for this component to be SSR-friendly
-  options: Array<SearchableDropdownOption>;
+  options: Array<{
+    label: string;
+    description?: string;
+    value: string;
+  }>;
   /**
    * callback to be invoked when input change. The parameter will
    * be the value instead of the event object
@@ -58,7 +59,7 @@ export const SearchableDropdown = React.forwardRef<
         isOpen,
       }) => {
         const filteredOptions = inputValue
-          ? filterOptionsByQuery(options, inputValue)
+          ? matchSorter(options, inputValue, { keys: ['label', 'description'] })
           : options;
 
         return (
