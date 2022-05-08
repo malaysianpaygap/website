@@ -11,14 +11,10 @@ import { Form } from '@/components/form';
 import { formatErrors } from '@/components/form/form';
 import { Stepper } from '@/components/stepper';
 
-import { IEmploymentOptions } from '@/shared/interface';
-import { generateOptionsValue } from '@/shared/util';
+import industries from '~/constants/industries.json';
+import specialisation from '~/constants/specialisation.json';
 
-interface ISubmitSalaryForm {
-  employmentOptions: IEmploymentOptions;
-}
-
-export const SubmitSalaryForm = (props: ISubmitSalaryForm) => {
+export const SubmitSalaryForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const [formIndex, setFormIndex] = React.useState(0);
@@ -70,7 +66,6 @@ export const SubmitSalaryForm = (props: ISubmitSalaryForm) => {
       )}
       {formIndex === 1 && (
         <SubmitSalarySalaryDetailsForm
-          employmentOptions={props.employmentOptions}
           initialValues={salaryDetails}
           onComplete={(salary) => {
             setSalaryDetails(salary);
@@ -291,12 +286,10 @@ const labelForSalaryDetails: Record<keyof SalaryDetails, string> = {
     'How satisfied are you with your current job overall? (Secara keseluruhan, adakah anda berpuas hati dengan kerja anda sekarang?)',
 };
 
-const SubmitSalarySalaryDetailsForm = (
-  props: {
-    initialValues?: SalaryDetails;
-    onComplete: (data: Required<SalaryDetails>) => void;
-  } & ISubmitSalaryForm
-) => {
+const SubmitSalarySalaryDetailsForm = (props: {
+  initialValues?: SalaryDetails;
+  onComplete: (data: Required<SalaryDetails>) => void;
+}) => {
   const form = useForm({
     defaultValues: props.initialValues || {
       jobTitle: '',
@@ -432,10 +425,7 @@ const SubmitSalarySalaryDetailsForm = (
           label={labelForSalaryDetails.industry}
           name='industries'
           required
-          options={[
-            { label: 'Please choose', value: '' },
-            ...generateOptionsValue(props.employmentOptions.industries),
-          ]}
+          options={[{ label: 'Please choose', value: '' }, ...industries]}
         />
         <Form.TextField
           label={labelForSalaryDetails.otherIndustry}
@@ -444,10 +434,7 @@ const SubmitSalarySalaryDetailsForm = (
         <Form.DropdownField
           label={labelForSalaryDetails.specialisation}
           name='specialisation'
-          options={[
-            { label: 'Please choose', value: '' },
-            ...generateOptionsValue(props.employmentOptions.specialisation),
-          ]}
+          options={[{ label: 'Please choose', value: '' }, ...specialisation]}
         />
         <Form.TextField
           label={labelForSalaryDetails.otherSpecialisation}

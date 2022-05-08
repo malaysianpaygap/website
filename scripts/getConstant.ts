@@ -1,29 +1,24 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-import { NextApiRequest, NextApiResponse } from 'next';
+import fs from 'fs';
 import path from 'path';
 import reader from 'xlsx';
-
-import { IEmploymentOptions } from '@/shared/interface';
 
 const SHEETS = {
   industries: 'Industry',
   specialisation: 'Job Specialisation',
 };
 
-export default function constant(_: NextApiRequest, res: NextApiResponse) {
+const getConstant = async () => {
   const filename = path.join(
     process.cwd(),
     '/public/Industry__Job_Specs_List.xlsx'
   );
   const file = reader.readFile(filename);
 
-  const data: IEmploymentOptions = {
-    industries: [],
-    specialisation: [],
-  };
+  const directory = path.join(process.cwd(), `public/constants`);
 
   Object.keys(SHEETS).map((k) => {
+    const temp: { value: string; label: string; desc: string }[] = [];
+
     const sheetKey = k as keyof typeof SHEETS;
     reader.utils
       .sheet_to_json<string[]>(file.Sheets[SHEETS[sheetKey]], { header: 1 })
@@ -33,9 +28,14 @@ export default function constant(_: NextApiRequest, res: NextApiResponse) {
         const value = res[0].trim();
         if (!value) return;
 
-        data[sheetKey].push(value);
+        temp.push({ value, label: value, desc: value });
       });
-  });
 
-  res.status(200).json({ data });
-}
+    fs.writeFileSync(
+      path.join(directory, `${sheetKey}.json`),
+      JSON.stringify(temp, null, 2)
+    );
+  });
+};
+
+export default getConstant;
