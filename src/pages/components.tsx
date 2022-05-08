@@ -48,6 +48,24 @@ export default function ComponentsPage() {
     },
   ];
 
+  const optionsWithDescriptions = [
+    {
+      label: 'One',
+      description: 'Descripton for option one',
+      value: 'One',
+    },
+    {
+      label: 'Two',
+      description: 'Descripton for option two',
+      value: 'Two',
+    },
+    {
+      label: 'Three',
+      description: 'Descripton for option three',
+      value: 'Three',
+    },
+  ];
+
   return (
     <Layout>
       <Seo
@@ -345,7 +363,7 @@ export default function ComponentsPage() {
                 </div>
               </li>
               <li>
-                <h2>SearchableDropdownField</h2>
+                <h2>SearchableDropdownField without descriptions</h2>
                 <div className='flex flex-col flex-wrap gap-4'>
                   <SearchableDropdownField
                     label='Default'
@@ -376,6 +394,42 @@ export default function ComponentsPage() {
                     status='error'
                     helpText='Required'
                     options={options}
+                    id='error-searchable-dropdown'
+                  />
+                </div>
+              </li>
+              <li>
+                <h2>SearchableDropdownField with descriptions</h2>
+                <div className='flex flex-col flex-wrap gap-4'>
+                  <SearchableDropdownField
+                    label='Default'
+                    options={optionsWithDescriptions}
+                    id='default-searchable-dropdown'
+                  />
+                  <SearchableDropdownField
+                    label='Disabled'
+                    disabled
+                    options={optionsWithDescriptions}
+                    id='disabled-searchable-dropdown'
+                  />
+                  <SearchableDropdownField
+                    label='Success'
+                    status='success'
+                    secondaryLabel='Optional'
+                    options={optionsWithDescriptions}
+                    id='success-searchable-dropdown'
+                  />
+                  <SearchableDropdownField
+                    label='Warning'
+                    status='warning'
+                    options={optionsWithDescriptions}
+                    id='warning-searchable-dropdown'
+                  />
+                  <SearchableDropdownField
+                    label='Error'
+                    status='error'
+                    helpText='Required'
+                    options={optionsWithDescriptions}
                     id='error-searchable-dropdown'
                   />
                 </div>

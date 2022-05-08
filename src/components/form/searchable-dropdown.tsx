@@ -11,6 +11,7 @@ export interface SearchableDropdownProps
   id: string; // id is required for this component to be SSR-friendly
   options: Array<{
     label: string;
+    description?: string;
     value: string;
   }>;
   /**
@@ -28,6 +29,10 @@ export const SearchableDropdown = React.forwardRef<
   forwardedRef
 ) {
   const { inputId, status } = useFieldControlContext(id);
+
+  const optionsHaveDescription = options.find((option) => option.description)
+    ? true
+    : false;
 
   return (
     <Downshift
@@ -72,10 +77,11 @@ export const SearchableDropdown = React.forwardRef<
           </div>
           <div className='relative'>
             {isOpen && (
-              <ul
+              <div
                 {...getMenuProps()}
                 className={cls(
                   'absolute z-10 w-full border border-solid border-gray-300 max-h-56 rounded-md text-base overflow-auto sm:text-sm bg-white',
+                  optionsHaveDescription && 'divide-y divide-slate-200',
                   status ? borderByStatus[status] : 'border-gray-300',
                   inputProps.disabled && 'bg-gray-100 text-gray-400',
                   className
@@ -95,26 +101,48 @@ export const SearchableDropdown = React.forwardRef<
                           .toLowerCase()
                           .includes(inputValue.toLowerCase())
                     )
-                    .map((item, index) => (
-                      <li
-                        className={cls(
-                          'px-2 py-2',
-                          highlightedIndex === index && 'bg-gray-100'
-                        )}
-                        key={item.value}
-                        {...getItemProps({
-                          key: item.value,
-                          item,
-                          index,
-                        })}
-                      >
-                        {item.label}
-                      </li>
-                    ))
+                    .map((item, index) =>
+                      optionsHaveDescription ? (
+                        <div
+                          className={cls(
+                            'px-2 py-2',
+                            highlightedIndex === index && 'bg-gray-100'
+                          )}
+                          key={item.value}
+                          {...getItemProps({
+                            key: item.value,
+                            item,
+                            index,
+                          })}
+                        >
+                          <div className='font-medium mb-1'>{item.label}</div>
+                          <div className='text-gray-800'>
+                            {item.description}
+                          </div>
+                        </div>
+                      ) : (
+                        <div
+                          className={cls(
+                            'px-2 py-2',
+                            highlightedIndex === index && 'bg-gray-100'
+                          )}
+                          key={item.value}
+                          {...getItemProps({
+                            key: item.value,
+                            item,
+                            index,
+                          })}
+                        >
+                          {item.label}
+                        </div>
+                      )
+                    )
                 ) : (
-                  <li className='py-2 mx-2 text-gray-500 text-sm'>No Result</li>
+                  <div className='py-2 mx-2 text-gray-500 text-sm'>
+                    No Result
+                  </div>
                 )}
-              </ul>
+              </div>
             )}
           </div>
         </div>
