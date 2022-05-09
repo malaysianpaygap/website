@@ -31,6 +31,8 @@ const getConstant = async () => {
         temp.push({ value, label: value, desc: value });
       });
 
+    if (!fs.existsSync(directory)) fs.mkdirSync(directory);
+
     fs.writeFileSync(
       path.join(directory, `${sheetKey}.json`),
       JSON.stringify(temp, null, 2)
