@@ -1,6 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import reader from 'xlsx';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const fs = require('fs');
+const path = require('path');
+const reader = require('xlsx');
 
 const SHEETS = {
   industries: 'Industry',
@@ -16,12 +17,11 @@ const getConstant = async () => {
 
   const directory = path.join(process.cwd(), `public/constants`);
 
-  Object.keys(SHEETS).map((k) => {
-    const temp: { value: string; label: string; desc: string }[] = [];
+  Object.keys(SHEETS).map((sheetKey) => {
+    const temp = [];
 
-    const sheetKey = k as keyof typeof SHEETS;
     reader.utils
-      .sheet_to_json<string[]>(file.Sheets[SHEETS[sheetKey]], { header: 1 })
+      .sheet_to_json(file.Sheets[SHEETS[sheetKey]], { header: 1 })
       .forEach((res) => {
         if (!res.length) return;
 
@@ -38,4 +38,4 @@ const getConstant = async () => {
   });
 };
 
-export default getConstant;
+module.exports = getConstant;

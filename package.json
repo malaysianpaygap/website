@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "ts-node ./scripts",
+    "predev": "node ./scripts",
     "dev": "next dev",
-    "build": "ts-node ./scripts && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint src --fix && yarn format",
@@ -19,7 +19,8 @@
     "release": "standard-version",
     "push-release": "git push --follow-tags origin main",
     "postbuild": "next-sitemap",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "node ./scripts"
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",

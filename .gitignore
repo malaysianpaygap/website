@@ -39,3 +39,7 @@ sitemap.xml
 
 # webstorm
 .idea
+
+# constant
+industries.json
+specialisation.json

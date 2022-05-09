@@ -1,4 +1,5 @@
-import getConstant from './getConstant';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const getConstant = require('./getConstant');
 
 const startScripts = async () => {
   await getConstant();
