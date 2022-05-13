@@ -37,3 +37,6 @@ yarn-error.log*
 
 # changelog
 CHANGELOG.md
+
+# public/constant
+/public/constants

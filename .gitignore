@@ -39,3 +39,6 @@ sitemap.xml
 
 # webstorm
 .idea
+
+# constant
+/public/constants

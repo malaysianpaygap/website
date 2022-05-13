@@ -11,6 +11,9 @@ import { Form } from '@/components/form';
 import { formatErrors } from '@/components/form/form';
 import { Stepper } from '@/components/stepper';
 
+import industries from '~/constants/industries.json';
+import specialisation from '~/constants/specialisation.json';
+
 export const SubmitSalaryForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -420,82 +423,9 @@ const SubmitSalarySalaryDetailsForm = (props: {
         />
         <Form.DropdownField
           label={labelForSalaryDetails.industry}
-          name='industry'
+          name='industries'
           required
-          options={[
-            {
-              label: 'Please choose',
-              value: '',
-            },
-            {
-              label: 'Healthcare/Health services',
-              value: 'Healthcare/Health services',
-            },
-            {
-              label: 'Utilities (water, gas, electricity)',
-              value: 'Utilities (water, gas, electricity)',
-            },
-            { label: 'Aviation', value: 'Aviation' },
-            { label: 'Construction', value: 'Construction' },
-            { label: 'Automotive', value: 'Automotive' },
-            { label: 'Supply Chain', value: 'Supply Chain' },
-            { label: 'Real Estate', value: 'Real Estate' },
-            { label: 'Engineering', value: 'Engineering' },
-            { label: 'Manufacturing', value: 'Manufacturing' },
-            { label: 'Technology/IT/Data', value: 'Technology/IT/Data' },
-            { label: 'Web3', value: 'Web3' },
-            { label: 'Food & Beverage', value: 'Food & Beverage' },
-            {
-              label: 'Hardware & Semiconductor',
-              value: 'Hardware & Semiconductor',
-            },
-            { label: 'Gaming', value: 'Gaming' },
-            { label: 'Recruitment', value: 'Recruitment' },
-            { label: 'Public Service', value: 'Public Service' },
-            { label: 'Veterinary', value: 'Veterinary' },
-            { label: 'Fitness', value: 'Fitness' },
-            { label: 'E-commerce & Retail', value: 'E-commerce & Retail' },
-            { label: 'Finance', value: 'Finance' },
-            { label: 'Media & Entertainment', value: 'Media & Entertainment' },
-            {
-              label: 'Medical Devices Industry',
-              value: 'Medical Devices Industry',
-            },
-            {
-              label: 'Transportation/Logistics',
-              value: 'Transportation/Logistics',
-            },
-            { label: 'Oil & Gas', value: 'Oil & Gas' },
-            {
-              label: 'Telecommunication Services',
-              value: 'Telecommunication Services',
-            },
-            {
-              label: 'Financial services/Investment/Banking/Insurance',
-              value: 'Financial services/Investment/Banking/Insurance',
-            },
-            { label: 'Chemical', value: 'Chemical' },
-            { label: 'FMCG', value: 'FMCG' },
-            { label: 'NGOs', value: 'NGOs' },
-            {
-              label: 'Business Process Outsourcing (BPO)',
-              value: 'Business Process Outsourcing (BPO)',
-            },
-            { label: 'Architecture', value: 'Architecture' },
-            { label: 'Consulting', value: 'Consulting' },
-            { label: 'Pharmaceutical', value: 'Pharmaceutical' },
-            { label: 'Tourism/Hospitality', value: 'Tourism/Hospitality' },
-            { label: 'Fashion', value: 'Fashion' },
-            { label: 'Creative Arts', value: 'Creative Arts' },
-            { label: 'Legal', value: 'Legal' },
-            {
-              label: 'Agriculture/Plantation',
-              value: 'Agriculture/Plantation',
-            },
-            { label: 'Education', value: 'Education' },
-            { label: 'Public Relations', value: 'Public Relations' },
-            { label: 'Other', value: 'Other' },
-          ]}
+          options={[{ label: 'Please choose', value: '' }, ...industries]}
         />
         <Form.TextField
           label={labelForSalaryDetails.otherIndustry}
@@ -504,48 +434,7 @@ const SubmitSalarySalaryDetailsForm = (props: {
         <Form.DropdownField
           label={labelForSalaryDetails.specialisation}
           name='specialisation'
-          options={[
-            { label: 'Please choose', value: '' },
-            { label: 'Admin', value: 'Admin' },
-            { label: 'Accounting', value: 'Accounting' },
-            { label: 'Architect', value: 'Architect' },
-            { label: 'Audit/Taxation', value: 'Audit/Taxation' },
-            { label: 'Business Development', value: 'Business Development' },
-            {
-              label: 'Creative - Art direction/visual design/copywriting',
-              value: 'Creative - Art direction/visual design/copywriting',
-            },
-            { label: 'Consulting', value: 'Consulting' },
-            {
-              label: 'Corporate Communications',
-              value: 'Corporate Communications',
-            },
-            { label: 'Customer Service', value: 'Customer Service' },
-            { label: 'Design', value: 'Design' },
-            { label: 'Engineering', value: 'Engineering' },
-            { label: 'Human Resources', value: 'Human Resources' },
-            { label: 'Interior Design', value: 'Interior Design' },
-            { label: 'IT - Data', value: 'IT - Data' },
-            { label: 'IT - Hardware', value: 'IT - Hardware' },
-            { label: 'IT - Network/DB/Sys', value: 'IT - Network/DB/Sys' },
-            { label: 'IT - Software', value: 'IT - Software' },
-            { label: 'Journalist/Editor', value: 'Journalist/Editor' },
-            { label: 'Legal', value: 'Legal' },
-            { label: 'Maintenance', value: 'Maintenance' },
-            { label: 'Marketing', value: 'Marketing' },
-            { label: 'Project Management', value: 'Project Management' },
-            {
-              label: 'Puchasing & Procurement',
-              value: 'Puchasing & Procurement',
-            },
-            { label: 'Quantity Survey', value: 'Quantity Survey' },
-            { label: 'Sales', value: 'Sales' },
-            {
-              label: 'Secretarial/Personal Assistant',
-              value: 'Secretarial/Personal Assistant',
-            },
-            { label: 'Other', value: 'Other' },
-          ]}
+          options={[{ label: 'Please choose', value: '' }, ...specialisation]}
         />
         <Form.TextField
           label={labelForSalaryDetails.otherSpecialisation}

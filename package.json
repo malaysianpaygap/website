@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node ./scripts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -18,7 +19,8 @@
     "release": "standard-version",
     "push-release": "git push --follow-tags origin main",
     "postbuild": "next-sitemap",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "node ./scripts"
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
@@ -36,7 +38,8 @@
     "react-textarea-autosize": "^8.3.3",
     "rifm": "^0.12.1",
     "scroll-into-view-if-needed": "^2.2.29",
-    "tailwind-merge": "^1.2.0"
+    "tailwind-merge": "^1.2.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
@@ -65,6 +68,7 @@
     "prettier-plugin-tailwindcss": "^0.1.8",
     "standard-version": "^9.3.2",
     "tailwindcss": "^3.0.23",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.2"
   },
   "lint-staged": {
